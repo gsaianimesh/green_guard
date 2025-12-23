@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>My Dashboard | GreenGuard</title>
+    <link href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🌱%3C/text%3E%3C/svg%3E" rel="icon" type="image/svg+xml" />
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=Poppins:wght@700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: { colors: { primary: "#06f967", "gg-green-bright": "#4CAF50", "gg-green-dark": "#0B1C11", "gg-green-mid": "#102918", "gg-green-light": "#133A21", "gg-green-cta": "#1A4B2B", "gg-dark-neutral": "#0E1410", "background-dark": "#0B0E0C", }, fontFamily: { display: ["Inter", "sans-serif"], heading: ["Poppins", "sans-serif"], }, borderRadius: { DEFAULT: "0.5rem", lg: "1rem", xl: "1.5rem", full: "9999px" }, boxShadow: { 'glow-primary': '0 0 15px 5px rgba(6, 249, 103, 0.4), 0 0 5px 2px rgba(6, 249, 103, 0.6)', 'glow-green': '0 0 15px 5px rgba(76, 175, 80, 0.4), 0 0 5px 2px rgba(76, 175, 80, 0.6)', } },
+            },
+        };
+    </script>
+    <style type="text/tailwindcss">
+        @layer components {
+            .glassmorphic { @apply bg-white/5 border border-white/10 shadow-lg rounded-xl; -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
+            .form-input-sm { @apply bg-white/10 border border-white/20 rounded py-1 px-2 text-sm w-full text-white placeholder-white/40 focus:ring-primary focus:border-primary transition-colors; }
+            .change-photo-btn { @apply absolute bottom-0 right-0 bg-primary text-background-dark rounded-full p-1.5 leading-none shadow-md hover:scale-110 transition-transform; }
+            .action-btn-sm { @apply text-xs font-bold py-1 px-3 rounded-full transition-colors; }
+            /* Skeleton styles */
+            .skeleton { @apply bg-white/10 animate-pulse rounded; }
+            .skeleton-text { @apply h-4 w-3/4 skeleton mb-2; }
+            .skeleton-text-sm { @apply h-3 w-1/2 skeleton mb-1; }
+            .skeleton-avatar { @apply w-24 h-24 rounded-full skeleton mx-auto; }
+            .skeleton-title { @apply h-6 w-1/2 skeleton mb-3; }
+            .skeleton-points { @apply h-12 w-1/3 skeleton mb-1; }
+            .skeleton-tree-card { @apply flex gap-4 items-center p-4 rounded-lg; }
+            .skeleton-tree-img { @apply w-20 h-20 rounded-md skeleton flex-shrink-0; }
+            .skeleton-tree-text { @apply h-3 w-full skeleton mb-1; }
+        }
+    </style>
+</head>
+
+<body class="bg-background-dark text-white font-display antialiased flex flex-col min-h-screen">
+    <div class="absolute inset-0 z-0"> <div class="absolute inset-0 bg-gradient-to-t from-background-dark to-gg-green-dark"></div> </div>
+    <div class="relative z-10 flex flex-col h-full grow">
+        <header class="fixed top-0 left-0 right-0 z-50 glassmorphic rounded-b-xl">
+             <nav class="container mx-auto px-6 py-4 flex items-center justify-between"><a href="index.html" class="flex items-center gap-2"> <span class="text-2xl text-primary drop-shadow-glow-primary">🌱</span> <h2 class="text-xl font-bold tracking-tight text-white font-heading">GreenGuard</h2> </a><div class="hidden md:flex items-center gap-6"> <a class="text-sm font-medium text-white/80 hover:text-white transition-colors" href="about.html">About</a> <a class="text-sm font-medium text-white/80 hover:text-white transition-colors" href="view-tree.html">Explore Map</a> <a class="text-sm font-medium text-white/80 hover:text-white transition-colors" href="partners.html">Partners</a> <a class="text-sm font-medium text-white/80 hover:text-white transition-colors" href="faq.html">FAQ</a> </div><div class="flex items-center gap-3"> <a id="loginBtn" href="auth.html" class="bg-white/10 hover:bg-white/20 text-white text-sm font-bold uppercase py-2 px-5 rounded-full transition-all duration-300">Login</a> <a id="dashboardBtn" href="dashboard.html" class="text-primary hover:text-white text-sm font-medium hidden" title="My Dashboard"> <span class="material-symbols-outlined">dashboard</span> </a> <a id="adminBtn" href="admin.html" class="bg-red-600 hover:bg-red-500 text-white text-sm font-bold uppercase py-2 px-4 rounded-full transition-all duration-300 hidden" title="Admin Panel"> <span class="material-symbols-outlined text-base leading-none">admin_panel_settings</span> </a> <a id="waterTreeBtn" href="water-tree.html" class="bg-blue-600 hover:bg-blue-500 text-white text-sm font-bold uppercase py-2 px-4 rounded-full transition-all duration-300 hidden" title="Water Trees"> <span class="material-symbols-outlined text-base leading-none">water_drop</span> </a> <a id="registerTreeBtn" href="register-tree.html" class="bg-primary hover:shadow-glow-primary text-background-dark text-sm font-bold uppercase py-2 px-4 rounded-full transition-all duration-300 hidden" title="Register New Tree"> <span class="material-symbols-outlined text-base leading-none">add_circle</span> </a> <button id="signOutBtn" class="text-white/60 hover:text-white text-sm font-medium hidden" title="Sign Out"> <span class="material-symbols-outlined">logout</span> </button> </div></nav>
+        </header>
+
+        <main class="container mx-auto px-6 py-12 grow mt-24">
+            <div id="contentContainer">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <div class="lg:col-span-1 space-y-8">
+                        <div class="glassmorphic rounded-xl p-6 relative">
+                            <div id="profileDisplay" class="text-center hidden">
+                                <div class="relative w-24 h-24 mx-auto mb-4">
+                                     <img id="profilePictureDisplay" src="" alt="Profile picture" class="w-24 h-24 rounded-full object-cover border-2 border-primary/50">
+                                </div>
+                                <h2 class="text-2xl font-bold font-heading text-white mb-1"> Welcome, <span id="usernameDisplay" class="text-primary"></span>! </h2>
+                                <p class="text-sm text-white/60 mb-4" id="emailDisplay"></p>
+                                <div class="my-4"> <p class="text-5xl font-black text-primary" id="ecoPointsDisplay"></p> <p class="text-white/70 font-medium text-sm">Eco Points</p> </div>
+                                <p class="text-sm text-white/70" id="locationDisplay"></p>
+                                <button id="editProfileBtn" class="absolute top-4 right-4 text-white/60 hover:text-primary transition-colors"> <span class="material-symbols-outlined">edit</span> </button>
+                            </div>
+
+                            <div id="profileSkeleton" class="text-center">
+                                <div class="skeleton-avatar mb-4"></div>
+                                <div class="skeleton-title mx-auto"></div>
+                                <div class="skeleton-text-sm mx-auto !w-1/3"></div>
+                                <div class="my-4 flex flex-col items-center">
+                                    <div class="skeleton-points mx-auto"></div>
+                                    <div class="skeleton-text-sm !w-1/4 mt-1"></div>
+                                </div>
+                                <div class="skeleton-text-sm mx-auto"></div>
+                            </div>
+
+                            <div id="profileEdit" class="hidden space-y-4">
+                                <h3 class="text-xl font-bold text-white text-center mb-4">Edit Profile</h3><div class="relative w-24 h-24 mx-auto mb-4"><img id="profilePictureEdit" src="" alt="Profile picture" class="w-24 h-24 rounded-full object-cover border-2 border-primary/50"><button type="button" id="changePhotoBtn" class="change-photo-btn" title="Change profile picture"> <span class="material-symbols-outlined text-base">edit</span> </button><input type="file" id="photoInput" class="hidden" accept="image/png, image/jpeg, image/webp"></div><div> <label for="usernameEdit" class="block text-xs font-medium text-white/80 mb-1">Username</label> <input type="text" id="usernameEdit" name="username" class="form-input-sm" placeholder="Your display name" required> </div><div> <label for="phoneEdit" class="block text-xs font-medium text-white/80 mb-1">Phone Number</label> <input type="tel" id="phoneEdit" name="phone" class="form-input-sm" placeholder="+91 ..." required> </div><div> <label for="locationEdit" class="block text-xs font-medium text-white/80 mb-1">Location (Area/City)</label> <input type="text" id="locationEdit" name="location" class="form-input-sm" placeholder="Your location text" required> <p class="text-xs text-white/50 mt-1">Note: Changing text won't update GPS.</p> </div><div class="flex gap-2 justify-center mt-6"><button id="cancelEditBtn" type="button" class="action-btn-sm bg-gray-600 hover:bg-gray-500 text-white">Cancel</button><button id="saveChangesBtn" type="button" class="action-btn-sm bg-primary hover:bg-opacity-80 text-background-dark">Save Changes</button></div>
+                            </div>
+                        </div>
+
+                        <div class="glassmorphic rounded-xl p-6">
+                            <h3 class="text-xl font-bold text-white mb-4">Quick Actions</h3>
+                            <div class="space-y-3">
+                                <a href="register-tree.html" class="w-full flex items-center gap-3 bg-primary/20 hover:bg-primary/40 text-white font-bold py-3 px-4 rounded-lg transition-colors"> <span class="material-symbols-outlined">add_circle</span> Register a New Tree </a>
+                                <a href="view-tree.html" class="w-full flex items-center gap-3 bg-white/10 hover:bg-white/20 text-white font-bold py-3 px-4 rounded-lg transition-colors"> <span class="material-symbols-outlined">map</span> View Nearby Trees </a>
+                                <a href="water-tree.html" class="w-full flex items-center gap-3 bg-blue-600/30 hover:bg-blue-600/50 text-white font-bold py-3 px-4 rounded-lg transition-colors"> <span class="material-symbols-outlined">water_drop</span> Water Trees </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-2 mt-8 lg:mt-0">
+                        <div class="glassmorphic rounded-xl p-6 md:p-8">
+                            <h2 class="text-3xl font-bold font-heading text-white mb-6">My Registered Trees</h2>
+                            <div id="myTreesList" class="space-y-4">
+                                <div class="skeleton-tree-card glassmorphic">
+                                    <div class="skeleton-tree-img"></div>
+                                    <div class="grow space-y-2">
+                                        <div class="skeleton-title !h-5 !w-1/2"></div>
+                                        <div class="skeleton-text-sm"></div>
+                                        <div class="skeleton-text-sm !w-1/4"></div>
+                                    </div>
+                                </div>
+                                <div class="skeleton-tree-card glassmorphic">
+                                    <div class="skeleton-tree-img"></div>
+                                    <div class="grow space-y-2">
+                                        <div class="skeleton-title !h-5 !w-1/2"></div>
+                                        <div class="skeleton-text-sm"></div>
+                                        <div class="skeleton-text-sm !w-1/4"></div>
+                                    </div>
+                                </div>
+                                <div class="skeleton-tree-card glassmorphic">
+                                    <div class="skeleton-tree-img"></div>
+                                    <div class="grow space-y-2">
+                                        <div class="skeleton-title !h-5 !w-1/2"></div>
+                                        <div class="skeleton-text-sm"></div>
+                                        <div class="skeleton-text-sm !w-1/4"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="bg-gradient-to-t from-[#1b1f1c] to-background-dark/0 mt-20">
+            <div class="container mx-auto px-6 py-12 text-center">
+                <div class="flex items-center justify-center gap-6 mb-8"> 
+                    <a class="text-sm font-medium text-white/80 hover:text-white transition-colors" href="about.html">About</a> 
+                    <a class="text-sm font-medium text-white/80 hover:text-white transition-colors" href="auth.html">Join</a> 
+                    <a class="text-sm font-medium text-white/80 hover:text-white transition-colors" href="partners.html">Partners</a> 
+                    <a class="text-sm font-medium text-white/80 hover:text-white transition-colors" href="faq.html">FAQ</a> 
+                    <a class="text-sm font-medium text-white/80 hover:text-white transition-colors" href="index.html">Home</a> 
+                </div>
+                <p class="text-sm text-white/50">© 2025 GreenGuard. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+    <script type="module" src="firebase-init.js"></script>
+    <script type="module" src="dashboard.js"></script>
+</body>
+</html>

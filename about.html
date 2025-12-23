@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>About - GreenGuard | Tree Care & Community Platform</title>
+    <link href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🌱%3C/text%3E%3C/svg%3E" rel="icon" type="image/svg+xml" />
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=Poppins:wght@700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#06f967",
+                        "gg-green-bright": "#4CAF50",
+                        "gg-green-dark": "#0B1C11",
+                        "gg-green-mid": "#102918",
+                        "gg-green-light": "#133A21",
+                        "gg-green-cta": "#1A4B2B",
+                        "gg-dark-neutral": "#0E1F14",
+                        "background-dark": "#0B0E0C",
+                    },
+                    fontFamily: {
+                        display: ["Inter", "sans-serif"],
+                        heading: ["Poppins", "sans-serif"],
+                    },
+                    borderRadius: { DEFAULT: "0.5rem", lg: "1rem", xl: "1.5rem", full: "9999px" },
+                    boxShadow: { 'glow-primary': '0 0 15px 5px rgba(6, 249, 103, 0.4), 0 0 5px 2px rgba(6, 249, 103, 0.6)', 'glow-green': '0 0 15px 5px rgba(76, 175, 80, 0.4), 0 0 5px 2px rgba(76, 175, 80, 0.6)', }
+                },
+            },
+        };
+    </script>
+    <style type="text/tailwindcss">
+        @layer components {
+            .glassmorphic { @apply bg-white/5 border border-white/10 shadow-lg rounded-xl; -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
+        }
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .animate-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #06f967 0%, #4CAF50 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+    </style>
+</head>
+
+<body class="bg-background-dark text-white font-display antialiased">
+    <div class="relative min-h-screen w-full flex flex-col overflow-x-hidden">
+        
+        <div class="absolute inset-0 z-0">
+            <img alt="Lush forest background" class="object-cover w-full h-full opacity-30" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYSTih5Kfltb8DoSzjqRVXy3xwkyn6sDpIQZqTCWpuntjDlq_Cq_13KnLkDKm_tdYXGm2R_JNPMbnvI1k3dA4xsoFik4Dz6apadnq790M9UdGO-6nLKtgJjVYRn_24FGVQ3-AvOhG3QCXTYKti0VV_ewEyjIvz5xgq8_ilm4D8J8E28sEE1NF4WweW_ejQjOeKve5wuJPxBe_4ewplD8CcwGtZ0bxCjYmQwvoGhUKhWOgRu0JnWd_my_AokNOYiWa4BmsPDpdU6_M" />
+            <div class="absolute inset-0 bg-gradient-to-t from-background-dark via-background-dark/80 to-transparent"></div>
+        </div>
+        
+        <div class="relative z-10 flex flex-col h-full grow">
+            <header class="fixed top-0 left-0 right-0 z-50 glassmorphic rounded-b-xl">
+                 <nav class="container mx-auto px-6 py-4 flex items-center justify-between">
+                     <a href="index.html" class="flex items-center gap-2"> 
+                         <span class="text-2xl text-primary drop-shadow-glow-primary">🌱</span> 
+                         <h2 class="text-xl font-bold tracking-tight text-white font-heading">GreenGuard</h2> 
+                     </a>
+                     <div class="hidden md:flex items-center gap-6"> 
+                         <a class="text-sm font-medium text-white/80 hover:text-white transition-colors" href="about.html">About</a> 
+                         <a class="text-sm font-medium text-white/80 hover:text-white transition-colors" href="view-tree.html">Explore Map</a> 
+                         <a class="text-sm font-medium text-white/80 hover:text-white transition-colors" href="partners.html">Partners</a> 
+                         <a class="text-sm font-medium text-white/80 hover:text-white transition-colors" href="faq.html">FAQ</a> 
+                         <a class="text-sm font-medium text-white/80 hover:text-white transition-colors" href="index.html">Home</a> 
+                     </div>
+                     <div class="flex items-center gap-3"> 
+                         <a id="loginBtn" href="auth.html" class="bg-white/10 hover:bg-white/20 text-white text-sm font-bold uppercase py-2 px-5 rounded-full transition-all duration-300">Login</a> 
+                         <a id="dashboardBtn" href="dashboard.html" class="text-primary hover:text-white text-sm font-medium hidden" title="My Dashboard"> <span class="material-symbols-outlined">dashboard</span> </a> 
+                         <a id="adminBtn" href="admin.html" class="bg-red-600 hover:bg-red-500 text-white text-sm font-bold uppercase py-2 px-4 rounded-full transition-all duration-300 hidden" title="Admin Panel"> <span class="material-symbols-outlined text-base leading-none">admin_panel_settings</span> </a> 
+                         <a id="waterTreeBtn" href="water-tree.html" class="bg-blue-600 hover:bg-blue-500 text-white text-sm font-bold uppercase py-2 px-4 rounded-full transition-all duration-300 hidden" title="Water Trees"> <span class="material-symbols-outlined text-base leading-none">water_drop</span> </a> 
+                         <a id="registerTreeBtn" href="register-tree.html" class="bg-primary hover:shadow-glow-primary text-background-dark text-sm font-bold uppercase py-2 px-4 rounded-full transition-all duration-300 hidden" title="Register New Tree"> <span class="material-symbols-outlined text-base leading-none">add_circle</span> </a> 
+                         <button id="signOutBtn" class="text-white/60 hover:text-white text-sm font-medium hidden" title="Sign Out"> <span class="material-symbols-outlined">logout</span> </button> 
+                     </div>
+                 </nav>
+            </header>
+
+            <main class="container mx-auto px-6 mt-24">
+                
+                <section class="text-center pt-20 pb-16 animate-on-scroll">
+                    <div class="inline-block mb-6">
+                        <span class="text-6xl">🌱</span>
+                    </div>
+                    <h1 class="text-5xl md:text-7xl font-black tracking-tighter text-white leading-tight mb-6 font-heading">
+                        About <span class="gradient-text">GreenGuard</span>
+                    </h1>
+                    <p class="text-xl md:text-2xl font-medium text-white/70 max-w-3xl mx-auto leading-relaxed">
+                        A rule-based, community-driven Green Tech platform designed to improve tree survival rates through long-term care, accountability, and community ownership.
+                    </p>
+                </section>
+
+                <section class="py-16 animate-on-scroll">
+                    <div class="glassmorphic rounded-2xl p-8 md:p-12 border border-primary/20">
+                        <div class="flex items-center gap-4 mb-6">
+                            <div class="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center">
+                                <span class="material-symbols-outlined text-3xl text-primary">public</span>
+                            </div>
+                            <h2 class="text-4xl font-bold font-heading text-white">🌍 Overview</h2>
+                        </div>
+                        <div class="space-y-4 text-lg text-white/80 leading-relaxed">
+                            <p>
+                                The Tree Care & Community Platform is a rule-based, community-driven Green Tech application designed to improve tree survival rates after plantation. Instead of focusing only on planting trees, the platform emphasizes <strong class="text-primary">long-term care, accountability, and community ownership</strong>.
+                            </p>
+                            <p>
+                                The system enables individuals, schools, NGOs, and corporates to collaboratively monitor, care for, and sustain trees using transparent logic-based technology — <strong class="text-primary">without using AI or machine learning</strong>.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="py-16 animate-on-scroll">
+                    <div class="text-center mb-12">
+                        <h2 class="text-4xl md:text-5xl font-bold font-heading text-white mb-4">🎯 The Problem We Address</h2>
+                        <p class="text-xl text-white/70 max-w-3xl mx-auto">Every year, millions of saplings are planted, but many don't survive due to lack of care and accountability.</p>
+                    </div>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="glassmorphic p-8 rounded-xl border border-red-500/20 hover:border-red-500/40 transition-all">
+                            <div class="flex items-center gap-4 mb-4">
+                                <span class="material-symbols-outlined text-4xl text-red-400">warning</span>
+                                <h3 class="text-2xl font-bold text-white">Lack of Regular Care</h3>
+                            </div>
+                            <p class="text-white/80 leading-relaxed">Trees need consistent watering and protection, but without tracking mechanisms, many saplings are left unattended after initial planting.</p>
+                        </div>
+                        <div class="glassmorphic p-8 rounded-xl border border-red-500/20 hover:border-red-500/40 transition-all">
+                            <div class="flex items-center gap-4 mb-4">
+                                <span class="material-symbols-outlined text-4xl text-red-400">account_tree</span>
+                                <h3 class="text-2xl font-bold text-white">No Accountability</h3>
+                            </div>
+                            <p class="text-white/80 leading-relaxed">Without proper tracking systems, there's no way to ensure trees are being cared for or to identify which areas need more attention.</p>
+                        </div>
+                        <div class="glassmorphic p-8 rounded-xl border border-red-500/20 hover:border-red-500/40 transition-all">
+                            <div class="flex items-center gap-4 mb-4">
+                                <span class="material-symbols-outlined text-4xl text-red-400">group_off</span>
+                                <h3 class="text-2xl font-bold text-white">Minimal Community Involvement</h3>
+                            </div>
+                            <p class="text-white/80 leading-relaxed">Local communities often aren't engaged in the care process, leading to a disconnect between planting initiatives and long-term sustainability.</p>
+                        </div>
+                        <div class="glassmorphic p-8 rounded-xl border border-red-500/20 hover:border-red-500/40 transition-all">
+                            <div class="flex items-center gap-4 mb-4">
+                                <span class="material-symbols-outlined text-4xl text-red-400">bar_chart</span>
+                                <h3 class="text-2xl font-bold text-white">No Data-Driven Monitoring</h3>
+                            </div>
+                            <p class="text-white/80 leading-relaxed">The absence of monitoring systems makes it impossible to measure survival rates, identify patterns, or make informed decisions about tree care.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="py-16 animate-on-scroll">
+                    <div class="text-center mb-12">
+                        <h2 class="text-4xl md:text-5xl font-bold font-heading text-white mb-4">📊 How Much is Involved</h2>
+                        <p class="text-xl text-white/70 max-w-3xl mx-auto">Real-time metrics showing our collective impact and community participation</p>
+                    </div>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-8">
+                        <div class="glassmorphic p-6 rounded-xl border border-primary/20 text-center hover:border-primary/40 transition-all hover:-translate-y-1">
+                            <span class="material-symbols-outlined text-4xl text-primary mb-2">park</span>
+                            <p class="text-3xl md:text-4xl font-bold text-primary mb-1" id="aboutTreeCount">...</p>
+                            <p class="text-sm text-white/70">Trees Registered</p>
+                        </div>
+                        <div class="glassmorphic p-6 rounded-xl border border-primary/20 text-center hover:border-primary/40 transition-all hover:-translate-y-1">
+                            <span class="material-symbols-outlined text-4xl text-primary mb-2">groups</span>
+                            <p class="text-3xl md:text-4xl font-bold text-primary mb-1" id="aboutMemberCount">...</p>
+                            <p class="text-sm text-white/70">Active Members</p>
+                        </div>
+                        <div class="glassmorphic p-6 rounded-xl border border-primary/20 text-center hover:border-primary/40 transition-all hover:-translate-y-1">
+                            <span class="material-symbols-outlined text-4xl text-primary mb-2">location_city</span>
+                            <p class="text-3xl md:text-4xl font-bold text-primary mb-1" id="aboutCommunityCount">...</p>
+                            <p class="text-sm text-white/70">Communities</p>
+                        </div>
+                        <div class="glassmorphic p-6 rounded-xl border border-primary/20 text-center hover:border-primary/40 transition-all hover:-translate-y-1">
+                            <span class="material-symbols-outlined text-4xl text-primary mb-2">water_drop</span>
+                            <p class="text-3xl md:text-4xl font-bold text-primary mb-1" id="aboutCareLogs">...</p>
+                            <p class="text-sm text-white/70">Care Logs</p>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+                        <div class="glassmorphic p-6 rounded-xl border border-primary/30 bg-gradient-to-br from-primary/10 to-transparent text-center">
+                            <span class="material-symbols-outlined text-4xl text-primary mb-2">co2</span>
+                            <p class="text-2xl md:text-3xl font-bold text-primary mb-1" id="aboutCO2">...</p>
+                            <p class="text-sm text-white/70">CO₂ Absorbed (kg/year)</p>
+                        </div>
+                        <div class="glassmorphic p-6 rounded-xl border border-primary/30 bg-gradient-to-br from-primary/10 to-transparent text-center">
+                            <span class="material-symbols-outlined text-4xl text-primary mb-2">air</span>
+                            <p class="text-2xl md:text-3xl font-bold text-primary mb-1" id="aboutOxygen">...</p>
+                            <p class="text-sm text-white/70">Oxygen Generated (kg/year)</p>
+                        </div>
+                        <div class="glassmorphic p-6 rounded-xl border border-primary/30 bg-gradient-to-br from-primary/10 to-transparent text-center">
+                            <span class="material-symbols-outlined text-4xl text-primary mb-2">trending_up</span>
+                            <p class="text-2xl md:text-3xl font-bold text-primary mb-1" id="aboutSurvivalRate">...</p>
+                            <p class="text-sm text-white/70">Survival Rate</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="py-16 animate-on-scroll">
+                    <div class="glassmorphic rounded-2xl p-8 md:p-12 border border-primary/30 bg-gradient-to-br from-primary/5 to-transparent">
+                        <div class="flex items-center gap-4 mb-6">
+                            <div class="w-16 h-16 rounded-full bg-primary/30 flex items-center justify-center">
+                                <span class="material-symbols-outlined text-3xl text-primary">lightbulb</span>
+                            </div>
+                            <h2 class="text-4xl font-bold font-heading text-white">💡 Our Solution</h2>
+                        </div>
+                        <div class="grid md:grid-cols-2 gap-6 mt-8">
+                            <div class="space-y-4">
+                                <div class="flex items-start gap-4">
+                                    <span class="material-symbols-outlined text-primary text-2xl mt-1">check_circle</span>
+                                    <div>
+                                        <h3 class="text-xl font-bold text-white mb-2">Registers & Geo-Tags Trees</h3>
+                                        <p class="text-white/80">Every tree is registered with precise GPS coordinates, species information, and planting dates for accurate tracking.</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-4">
+                                    <span class="material-symbols-outlined text-primary text-2xl mt-1">check_circle</span>
+                                    <div>
+                                        <h3 class="text-xl font-bold text-white mb-2">Enables Verified Care Logging</h3>
+                                        <p class="text-white/80">Community members can log care activities with photo verification and GPS validation to ensure authenticity.</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-4">
+                                    <span class="material-symbols-outlined text-primary text-2xl mt-1">check_circle</span>
+                                    <div>
+                                        <h3 class="text-xl font-bold text-white mb-2">Encourages Participation</h3>
+                                        <p class="text-white/80">Gamification elements like points, leaderboards, and badges make tree care engaging and rewarding.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="space-y-4">
+                                <div class="flex items-start gap-4">
+                                    <span class="material-symbols-outlined text-primary text-2xl mt-1">check_circle</span>
+                                    <div>
+                                        <h3 class="text-xl font-bold text-white mb-2">Tracks Impact</h3>
+                                        <p class="text-white/80">Rule-based calculations track survival rates, CO₂ absorption, and oxygen generation using transparent formulas.</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-4">
+                                    <span class="material-symbols-outlined text-primary text-2xl mt-1">check_circle</span>
+                                    <div>
+                                        <h3 class="text-xl font-bold text-white mb-2">Offers Dashboards</h3>
+                                        <p class="text-white/80">NGOs, schools, and administrators get comprehensive dashboards for monitoring and decision-making.</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-4">
+                                    <span class="material-symbols-outlined text-primary text-2xl mt-1">check_circle</span>
+                                    <div>
+                                        <h3 class="text-xl font-bold text-white mb-2">Deterministic Validation</h3>
+                                        <p class="text-white/80">All actions are validated using rule-based logic, ensuring reliability and transparency without AI dependency.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="py-16 animate-on-scroll">
+                    <div class="text-center mb-12">
+                        <h2 class="text-4xl md:text-5xl font-bold font-heading text-white mb-4">⚙️ How the Platform Works</h2>
+                        <p class="text-xl text-white/70 max-w-3xl mx-auto">A step-by-step guide to our transparent, rule-based system</p>
+                    </div>
+                    <div class="space-y-8">
+                        <div class="glassmorphic p-8 rounded-xl border border-primary/20 hover:border-primary/40 transition-all">
+                            <div class="flex flex-col md:flex-row items-start gap-6">
+                                <div class="flex-shrink-0 w-20 h-20 rounded-full bg-primary/20 flex items-center justify-center text-3xl font-bold text-primary">
+                                    1️⃣
+                                </div>
+                                <div class="flex-1">
+                                    <h3 class="text-2xl font-bold text-white mb-3">Tree Registration & Mapping</h3>
+                                    <p class="text-white/80 leading-relaxed mb-4">Trees are registered with location (GPS), species, and planting date. Each tree appears on a shared interactive map, and optional QR codes can be used for quick access.</p>
+                                    <div class="flex flex-wrap gap-2">
+                                        <span class="px-3 py-1 bg-primary/20 text-primary rounded-full text-sm">GPS Tracking</span>
+                                        <span class="px-3 py-1 bg-primary/20 text-primary rounded-full text-sm">Interactive Map</span>
+                                        <span class="px-3 py-1 bg-primary/20 text-primary rounded-full text-sm">QR Codes</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="glassmorphic p-8 rounded-xl border border-primary/20 hover:border-primary/40 transition-all">
+                            <div class="flex flex-col md:flex-row items-start gap-6">
+                                <div class="flex-shrink-0 w-20 h-20 rounded-full bg-primary/20 flex items-center justify-center text-3xl font-bold text-primary">
+                                    2️⃣
+                                </div>
+                                <div class="flex-1">
+                                    <h3 class="text-2xl font-bold text-white mb-3">Community Care Logging</h3>
+                                    <p class="text-white/80 leading-relaxed mb-4">Local users can care for nearby trees by uploading a photo, selecting health indicators (checklist-based), and submitting the care log. Each submission is validated using GPS proximity, timestamp checks, and frequency limits.</p>
+                                    <div class="grid md:grid-cols-3 gap-4 mt-4">
+                                        <div class="p-4 bg-white/5 rounded-lg">
+                                            <span class="material-symbols-outlined text-primary text-2xl mb-2">gps_fixed</span>
+                                            <p class="text-sm text-white/80">GPS Proximity Validation</p>
+                                        </div>
+                                        <div class="p-4 bg-white/5 rounded-lg">
+                                            <span class="material-symbols-outlined text-primary text-2xl mb-2">schedule</span>
+                                            <p class="text-sm text-white/80">Timestamp Verification</p>
+                                        </div>
+                                        <div class="p-4 bg-white/5 rounded-lg">
+                                            <span class="material-symbols-outlined text-primary text-2xl mb-2">block</span>
+                                            <p class="text-sm text-white/80">24-Hour Frequency Limit</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="glassmorphic p-8 rounded-xl border border-primary/20 hover:border-primary/40 transition-all">
+                            <div class="flex flex-col md:flex-row items-start gap-6">
+                                <div class="flex-shrink-0 w-20 h-20 rounded-full bg-primary/20 flex items-center justify-center text-3xl font-bold text-primary">
+                                    3️⃣
+                                </div>
+                                <div class="flex-1">
+                                    <h3 class="text-2xl font-bold text-white mb-3">Rule-Based Monitoring & Validation (NO AI)</h3>
+                                    <p class="text-white/80 leading-relaxed mb-4">The system uses logical rules, not AI, to ensure authenticity. This includes distance validation, time-based restrictions, manual health checklists, and deterministic health scoring formulas. This ensures fairness, transparency, and full compliance with non-AI constraints.</p>
+                                    <div class="p-4 bg-green-500/10 border border-green-500/30 rounded-lg">
+                                        <p class="text-green-400 font-semibold mb-2">✅ Fully Rule-Based</p>
+                                        <p class="text-sm text-white/80">No machine learning, no AI predictions—just transparent, deterministic logic that anyone can verify.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="glassmorphic p-8 rounded-xl border border-primary/20 hover:border-primary/40 transition-all">
+                            <div class="flex flex-col md:flex-row items-start gap-6">
+                                <div class="flex-shrink-0 w-20 h-20 rounded-full bg-primary/20 flex items-center justify-center text-3xl font-bold text-primary">
+                                    4️⃣
+                                </div>
+                                <div class="flex-1">
+                                    <h3 class="text-2xl font-bold text-white mb-3">Gamification & Community Engagement</h3>
+                                    <p class="text-white/80 leading-relaxed mb-4">To encourage consistent participation, users earn Green Coins for verified actions, leaderboards rank individuals and communities, and badges/certificates reward long-term contribution. This transforms tree care into a collaborative and rewarding activity.</p>
+                                    <div class="flex flex-wrap gap-3 mt-4">
+                                        <div class="flex items-center gap-2 px-4 py-2 bg-primary/20 rounded-full">
+                                            <span class="material-symbols-outlined text-primary">monetization_on</span>
+                                            <span class="text-white">Green Coins</span>
+                                        </div>
+                                        <div class="flex items-center gap-2 px-4 py-2 bg-primary/20 rounded-full">
+                                            <span class="material-symbols-outlined text-primary">leaderboard</span>
+                                            <span class="text-white">Leaderboards</span>
+                                        </div>
+                                        <div class="flex items-center gap-2 px-4 py-2 bg-primary/20 rounded-full">
+                                            <span class="material-symbols-outlined text-primary">workspace_premium</span>
+                                            <span class="text-white">Badges</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="glassmorphic p-8 rounded-xl border border-primary/20 hover:border-primary/40 transition-all">
+                            <div class="flex flex-col md:flex-row items-start gap-6">
+                                <div class="flex-shrink-0 w-20 h-20 rounded-full bg-primary/20 flex items-center justify-center text-3xl font-bold text-primary">
+                                    5️⃣
+                                </div>
+                                <div class="flex-1">
+                                    <h3 class="text-2xl font-bold text-white mb-3">Tree Adoption & Story Timeline</h3>
+                                    <p class="text-white/80 leading-relaxed mb-4">Individuals or institutions can adopt trees. Each tree maintains a story timeline with care events, photos, and contributors. Adoption certificates can be downloaded and shared, creating emotional bonding and long-term responsibility.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="glassmorphic p-8 rounded-xl border border-primary/20 hover:border-primary/40 transition-all">
+                            <div class="flex flex-col md:flex-row items-start gap-6">
+                                <div class="flex-shrink-0 w-20 h-20 rounded-full bg-primary/20 flex items-center justify-center text-3xl font-bold text-primary">
+                                    6️⃣
+                                </div>
+                                <div class="flex-1">
+                                    <h3 class="text-2xl font-bold text-white mb-3">Admin, NGO & School Dashboards</h3>
+                                    <p class="text-white/80 leading-relaxed mb-4">Authorized organizations can access dashboards showing total registered trees, active vs inactive trees, area-wise survival rates, care frequency patterns, and top-performing communities and schools. This enables large-scale monitoring and decision-making.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="py-16 animate-on-scroll">
+                    <div class="glassmorphic rounded-2xl p-8 md:p-12 border border-primary/30">
+                        <div class="flex items-center gap-4 mb-8">
+                            <div class="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center">
+                                <span class="material-symbols-outlined text-3xl text-primary">eco</span>
+                            </div>
+                            <h2 class="text-4xl font-bold font-heading text-white">🌍 Environmental Impact Tracking</h2>
+                        </div>
+                        <p class="text-lg text-white/80 mb-8 leading-relaxed">
+                            The platform calculates impact using publicly available static values, such as tree survival percentage, estimated CO₂ absorption, and estimated oxygen generation. All calculations are rule-based and documented for transparency.
+                        </p>
+                        <div class="grid md:grid-cols-3 gap-6">
+                            <div class="p-6 bg-white/5 rounded-xl border border-primary/20">
+                                <span class="material-symbols-outlined text-4xl text-primary mb-3">percent</span>
+                                <h3 class="text-xl font-bold text-white mb-2">Survival Rate</h3>
+                                <p class="text-white/70 text-sm">Percentage of trees that are actively being cared for and thriving in their environment.</p>
+                            </div>
+                            <div class="p-6 bg-white/5 rounded-xl border border-primary/20">
+                                <span class="material-symbols-outlined text-4xl text-primary mb-3">co2</span>
+                                <h3 class="text-xl font-bold text-white mb-2">CO₂ Absorption</h3>
+                                <p class="text-white/70 text-sm">Estimated carbon dioxide absorbed per tree per year using standardized forestry research values.</p>
+                            </div>
+                            <div class="p-6 bg-white/5 rounded-xl border border-primary/20">
+                                <span class="material-symbols-outlined text-4xl text-primary mb-3">air</span>
+                                <h3 class="text-xl font-bold text-white mb-2">Oxygen Generation</h3>
+                                <p class="text-white/70 text-sm">Estimated oxygen produced per tree per year, contributing to cleaner air for communities.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="py-16 animate-on-scroll">
+                    <div class="glassmorphic rounded-2xl p-8 md:p-12 border border-primary/30 bg-gradient-to-br from-primary/5 to-transparent">
+                        <div class="flex items-center gap-4 mb-8">
+                            <div class="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center">
+                                <span class="material-symbols-outlined text-3xl text-primary">verified</span>
+                            </div>
+                            <h2 class="text-4xl font-bold font-heading text-white">🔒 Transparency & Compliance</h2>
+                        </div>
+                        <div class="grid md:grid-cols-2 gap-8">
+                            <div>
+                                <h3 class="text-2xl font-bold text-red-400 mb-4 flex items-center gap-2">
+                                    <span class="material-symbols-outlined">close</span>
+                                    What We Don't Use
+                                </h3>
+                                <ul class="space-y-3">
+                                    <li class="flex items-start gap-3">
+                                        <span class="material-symbols-outlined text-red-400 mt-1">cancel</span>
+                                        <span class="text-white/80">No AI or Machine Learning</span>
+                                    </li>
+                                    <li class="flex items-start gap-3">
+                                        <span class="material-symbols-outlined text-red-400 mt-1">cancel</span>
+                                        <span class="text-white/80">No automated image analysis</span>
+                                    </li>
+                                    <li class="flex items-start gap-3">
+                                        <span class="material-symbols-outlined text-red-400 mt-1">cancel</span>
+                                        <span class="text-white/80">No black-box algorithms</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h3 class="text-2xl font-bold text-primary mb-4 flex items-center gap-2">
+                                    <span class="material-symbols-outlined">check_circle</span>
+                                    What We Do Use
+                                </h3>
+                                <ul class="space-y-3">
+                                    <li class="flex items-start gap-3">
+                                        <span class="material-symbols-outlined text-primary mt-1">rule</span>
+                                        <span class="text-white/80">Fully rule-based logic</span>
+                                    </li>
+                                    <li class="flex items-start gap-3">
+                                        <span class="material-symbols-outlined text-primary mt-1">groups</span>
+                                        <span class="text-white/80">Community-verified actions</span>
+                                    </li>
+                                    <li class="flex items-start gap-3">
+                                        <span class="material-symbols-outlined text-primary mt-1">visibility</span>
+                                        <span class="text-white/80">Deterministic and auditable system</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="py-16 animate-on-scroll">
+                    <div class="text-center mb-12">
+                        <h2 class="text-4xl md:text-5xl font-bold font-heading text-white mb-4">🌱 Why This Platform Matters</h2>
+                    </div>
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="glassmorphic p-6 rounded-xl border border-primary/20 hover:border-primary/40 transition-all hover:-translate-y-2">
+                            <span class="material-symbols-outlined text-4xl text-primary mb-4">trending_up</span>
+                            <h3 class="text-xl font-bold text-white mb-2">Promotes Long-Term Survival</h3>
+                            <p class="text-white/80 text-sm">Ensures trees receive consistent care beyond initial planting, dramatically improving survival rates.</p>
+                        </div>
+                        <div class="glassmorphic p-6 rounded-xl border border-primary/20 hover:border-primary/40 transition-all hover:-translate-y-2">
+                            <span class="material-symbols-outlined text-4xl text-primary mb-4">groups</span>
+                            <h3 class="text-xl font-bold text-white mb-2">Empowers Local Communities</h3>
+                            <p class="text-white/80 text-sm">Gives communities ownership and responsibility for their local environment, fostering pride and engagement.</p>
+                        </div>
+                        <div class="glassmorphic p-6 rounded-xl border border-primary/20 hover:border-primary/40 transition-all hover:-translate-y-2">
+                            <span class="material-symbols-outlined text-4xl text-primary mb-4">verified</span>
+                            <h3 class="text-xl font-bold text-white mb-2">Provides Accountability</h3>
+                            <p class="text-white/80 text-sm">Creates transparent tracking mechanisms for plantation drives, ensuring resources are used effectively.</p>
+                        </div>
+                        <div class="glassmorphic p-6 rounded-xl border border-primary/20 hover:border-primary/40 transition-all hover:-translate-y-2">
+                            <span class="material-symbols-outlined text-4xl text-primary mb-4">analytics</span>
+                            <h3 class="text-xl font-bold text-white mb-2">Enables Measurable Impact</h3>
+                            <p class="text-white/80 text-sm">Provides concrete data on environmental benefits, making the case for continued investment in green initiatives.</p>
+                        </div>
+                        <div class="glassmorphic p-6 rounded-xl border border-primary/20 hover:border-primary/40 transition-all hover:-translate-y-2">
+                            <span class="material-symbols-outlined text-4xl text-primary mb-4">speed</span>
+                            <h3 class="text-xl font-bold text-white mb-2">Scales Easily</h3>
+                            <p class="text-white/80 text-sm">Simple, rule-based architecture allows the platform to grow without complex infrastructure requirements.</p>
+                        </div>
+                        <div class="glassmorphic p-6 rounded-xl border border-primary/20 hover:border-primary/40 transition-all hover:-translate-y-2">
+                            <span class="material-symbols-outlined text-4xl text-primary mb-4">accessibility_new</span>
+                            <h3 class="text-xl font-bold text-white mb-2">Accessible to All</h3>
+                            <p class="text-white/80 text-sm">Designed for individuals, schools, NGOs, and corporates—anyone can participate in tree care.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="py-20 my-16 bg-gradient-to-r from-gg-green-light to-gg-green-cta rounded-2xl glassmorphic animate-on-scroll">
+                    <div class="text-center max-w-4xl mx-auto">
+                        <div class="inline-block mb-6">
+                            <span class="text-6xl">🚀</span>
+                        </div>
+                        <h2 class="text-4xl md:text-5xl font-bold font-heading text-white mb-6">Vision Ahead</h2>
+                        <p class="text-xl text-white/80 leading-relaxed mb-8">
+                            Our long-term vision is to create a nationwide ecosystem where every tree planted has a caretaker, a story, and a measurable impact, making sustainability a shared responsibility.
+                        </p>
+                        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                            <a href="auth.html" class="bg-primary hover:shadow-glow-primary text-background-dark text-lg font-bold uppercase py-4 px-8 rounded-full transition-all duration-300">
+                                Join the Movement
+                            </a>
+                            <a href="index.html" class="bg-white/10 hover:bg-white/20 text-white text-lg font-bold uppercase py-4 px-8 rounded-full transition-all duration-300">
+                                Explore Platform
+                            </a>
+                        </div>
+                    </div>
+                </section>
+
+            </main>
+
+            <footer class="bg-gradient-to-t from-[#1b1f1c] to-background-dark/0 mt-20">
+                <div class="container mx-auto px-6 py-12 text-center">
+                    <div class="flex items-center justify-center gap-6 mb-8"> 
+                        <a class="text-sm font-medium text-white/80 hover:text-white transition-colors" href="about.html">About</a> 
+                        <a class="text-sm font-medium text-white/80 hover:text-white transition-colors" href="auth.html">Join</a> 
+                        <a class="text-sm font-medium text-white/80 hover:text-white transition-colors" href="partners.html">Partners</a> 
+                        <a class="text-sm font-medium text-white/80 hover:text-white transition-colors" href="faq.html">FAQ</a> 
+                        <a class="text-sm font-medium text-white/80 hover:text-white transition-colors" href="index.html">Home</a> 
+                    </div>
+                    <p class="text-sm text-white/50">© 2025 GreenGuard. All rights reserved.</p>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <script type="module" src="firebase-init.js"></script>
+    <script type="module">
+        import { auth, db } from './firebase-init.js';
+        import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+        import { collection, getDocs, Timestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+        const ADMIN_UID = "PASTE_YOUR_OWN_USER_UID_HERE";
+
+        function setupAuthListeners() {
+            const loginBtn = document.getElementById('loginBtn');
+            const signOutBtn = document.getElementById('signOutBtn');
+            const dashboardBtn = document.getElementById('dashboardBtn');
+            const adminBtn = document.getElementById('adminBtn');
+            const waterTreeBtn = document.getElementById('waterTreeBtn');
+            const registerTreeBtn = document.getElementById('registerTreeBtn');
+
+            onAuthStateChanged(auth, (user) => {
+                if (user) {
+                    if(loginBtn) loginBtn.style.display = 'none';
+                    if(signOutBtn) signOutBtn.style.display = 'block';
+                    if(dashboardBtn) dashboardBtn.style.display = 'block';
+                    if(waterTreeBtn) waterTreeBtn.style.display = 'block';
+                    if(registerTreeBtn) registerTreeBtn.style.display = 'block';
+                    if (user.uid === ADMIN_UID && adminBtn) { adminBtn.style.display = 'block'; }
+                    else if (adminBtn) { adminBtn.style.display = 'none'; }
+                } else {
+                    if(loginBtn) loginBtn.style.display = 'block';
+                    if(signOutBtn) signOutBtn.style.display = 'none';
+                    if(dashboardBtn) dashboardBtn.style.display = 'none';
+                    if(adminBtn) adminBtn.style.display = 'none';
+                    if(waterTreeBtn) waterTreeBtn.style.display = 'none';
+                    if(registerTreeBtn) registerTreeBtn.style.display = 'none';
+                }
+            });
+
+            if (signOutBtn) {
+                signOutBtn.addEventListener('click', () => {
+                    signOut(auth).then(() => {
+                        alert('You have been signed out.');
+                        window.location.reload();
+                    }).catch((error) => {
+                        console.error('Sign out error:', error);
+                        alert(`Sign out failed: ${error.message}`);
+                    });
+                });
+            }
+        }
+
+        const CO2_ABSORBED_PER_TREE_PER_YEAR = 22.7;
+        const OXYGEN_GENERATED_PER_TREE_PER_YEAR = 118;
+        const DAYS_FOR_ACTIVE_CARE = 30;
+
+        function animateCountUp(el, final) {
+            if (!el || isNaN(final) || final === 0) { 
+                if (el) el.textContent = final || '0'; 
+                return; 
+            }
+            el.textContent = '0';
+            let start = 0;
+            const duration = 1500;
+            const startTime = performance.now();
+
+            function step(currentTime) {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const currentCount = Math.floor(progress * final);
+                el.textContent = currentCount.toLocaleString();
+                if (progress < 1) {
+                    requestAnimationFrame(step);
+                } else {
+                    el.textContent = final.toLocaleString();
+                }
+            }
+            requestAnimationFrame(step);
+        }
+
+        async function loadAboutMetrics() {
+            try {
+                const treesSnapshot = await getDocs(collection(db, "trees"));
+                const usersSnapshot = await getDocs(collection(db, "users"));
+                const logsSnapshot = await getDocs(collection(db, "watering_logs"));
+                
+                const allTrees = [];
+                treesSnapshot.forEach((doc) => {
+                    allTrees.push({ id: doc.id, ...doc.data() });
+                });
+                
+                const allUsers = [];
+                usersSnapshot.forEach((doc) => {
+                    allUsers.push({ id: doc.id, ...doc.data() });
+                });
+                
+                const allLogs = [];
+                logsSnapshot.forEach((doc) => {
+                    allLogs.push({ id: doc.id, ...doc.data() });
+                });
+
+                const totalTrees = allTrees.length;
+                const totalUsers = allUsers.length;
+                const totalLogs = allLogs.length;
+                
+                const locations = new Set();
+                allUsers.forEach((user) => {
+                    if (user.location_text) {
+                        const normalizedLocation = user.location_text.trim().toLowerCase();
+                        if (normalizedLocation) { locations.add(normalizedLocation); }
+                    }
+                });
+                const totalCommunities = locations.size;
+
+                const approvedTrees = allTrees.filter(t => t.verification_status === 'approved').length;
+                const thirtyDaysAgo = Timestamp.fromDate(new Date(Date.now() - DAYS_FOR_ACTIVE_CARE * 24 * 60 * 60 * 1000));
+                const activeTrees = allTrees.filter(tree => {
+                    if (tree.verification_status !== 'approved') return false;
+                    if (!tree.last_watered_at) return false;
+                    return tree.last_watered_at.toMillis() >= thirtyDaysAgo.toMillis();
+                }).length;
+
+                const survivalRate = approvedTrees > 0 ? ((activeTrees / approvedTrees) * 100).toFixed(1) : 0;
+                const co2Absorbed = (approvedTrees * CO2_ABSORBED_PER_TREE_PER_YEAR).toFixed(1);
+                const oxygenGenerated = (approvedTrees * OXYGEN_GENERATED_PER_TREE_PER_YEAR).toFixed(1);
+
+                const treeCountEl = document.getElementById('aboutTreeCount');
+                const memberCountEl = document.getElementById('aboutMemberCount');
+                const communityCountEl = document.getElementById('aboutCommunityCount');
+                const careLogsEl = document.getElementById('aboutCareLogs');
+                const co2El = document.getElementById('aboutCO2');
+                const oxygenEl = document.getElementById('aboutOxygen');
+                const survivalEl = document.getElementById('aboutSurvivalRate');
+
+                if (treeCountEl) {
+                    treeCountEl.textContent = totalTrees;
+                    animateCountUp(treeCountEl, totalTrees);
+                }
+                if (memberCountEl) {
+                    memberCountEl.textContent = totalUsers;
+                    animateCountUp(memberCountEl, totalUsers);
+                }
+                if (communityCountEl) {
+                    communityCountEl.textContent = totalCommunities;
+                    animateCountUp(communityCountEl, totalCommunities);
+                }
+                if (careLogsEl) {
+                    careLogsEl.textContent = totalLogs;
+                    animateCountUp(careLogsEl, totalLogs);
+                }
+                if (co2El) co2El.textContent = co2Absorbed + ' kg';
+                if (oxygenEl) oxygenEl.textContent = oxygenGenerated + ' kg';
+                if (survivalEl) survivalEl.textContent = survivalRate + '%';
+
+            } catch (error) {
+                console.error("Error loading about metrics:", error);
+                const elements = ['aboutTreeCount', 'aboutMemberCount', 'aboutCommunityCount', 'aboutCareLogs', 'aboutCO2', 'aboutOxygen', 'aboutSurvivalRate'];
+                elements.forEach(id => {
+                    const el = document.getElementById(id);
+                    if (el) el.textContent = 'Error';
+                });
+            }
+        }
+
+        function setupScrollAnimations() {
+            const elements = document.querySelectorAll('.animate-on-scroll');
+            if (!elements.length) return;
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { 
+                threshold: 0.1
+            });
+
+            elements.forEach(el => observer.observe(el));
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            setupAuthListeners();
+            setupScrollAnimations();
+            loadAboutMetrics();
+        });
+    </script>
+
+</body>
+</html>
+

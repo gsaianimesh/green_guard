@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Admin Dashboard | GreenGuard</title>
+
+    <link href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🌱%3C/text%3E%3C/svg%3E" rel="icon" type="image/svg+xml" />
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=Poppins:wght@700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+        tailwind.config = {
+             darkMode: "class",
+             theme: {
+                 extend: {
+                    colors: {
+                        primary: "#06f967",
+                        "gg-green-bright": "#4CAF50",
+                        "gg-green-dark": "#0B1C11",
+                        "gg-green-mid": "#102918",
+                        "gg-green-light": "#133A21",
+                        "gg-green-cta": "#1A4B2B",
+                        "gg-dark-neutral": "#0E1410",
+                        "background-dark": "#0B0E0C",
+                    },
+                    fontFamily: {
+                        display: ["Inter", "sans-serif"],
+                        heading: ["Poppins", "sans-serif"],
+                    },
+                     borderRadius: { DEFAULT: "0.5rem", lg: "1rem", xl: "1.5rem", full: "9999px" },
+                    boxShadow: { /* ... */ }
+                },
+             },
+        };
+    </script>
+
+    <style type="text/tailwindcss">
+        @layer components {
+            .glassmorphic {
+                @apply bg-white/5 border border-white/10 shadow-lg rounded-xl;
+                -webkit-backdrop-filter: blur(10px);
+                backdrop-filter: blur(10px);
+            }
+             .admin-action-btn {
+                 @apply text-xs font-bold py-1 px-3 rounded-full transition-colors;
+            }
+            .edit-input {
+                 @apply bg-white/10 border border-white/20 rounded py-1 px-2 text-xs w-full text-white !important;
+            }
+             select.edit-input option {
+                 background: #0E1410 !important;
+                 color: white !important;
+            }
+             input[type="date"].edit-input {
+                 padding-right: 0.5rem !important;
+                 position: relative;
+            }
+             input[type="date"].edit-input::-webkit-calendar-picker-indicator {
+                 filter: invert(1) grayscale(1) brightness(1.5) opacity(0.6);
+                 cursor: pointer;
+                 padding: 0.25rem;
+            }
+            .edit-fields {
+                 @apply border-t border-white/10 mt-4 pt-4 space-y-2;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-background-dark text-white font-display antialiased">
+    <div class="relative min-h-screen w-full flex flex-col overflow-x-hidden">
+        <div class="absolute inset-0 z-0">
+             <div class="absolute inset-0 bg-gradient-to-t from-background-dark to-gg-green-dark"></div>
+        </div>
+
+        {/* Admin Header */}
+        <header class="relative z-10 glassmorphic sticky top-0">
+            <nav class="container mx-auto px-6 py-4 flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                    <span class="text-2xl text-primary drop-shadow-glow-primary">🌱</span>
+                    <h2 class="text-xl font-bold tracking-tight text-white font-heading">GreenGuard Admin</h2>
+                </div>
+                <div class="flex items-center gap-4">
+                    <a href="index.html" class="text-sm font-medium text-white/80 hover:text-white transition-colors">← Homepage</a>
+                    <button id="signOutBtn" class="text-sm font-medium text-red-500/80 hover:text-red-500 transition-colors">Sign Out</button>
+                </div>
+            </nav>
+        </header>
+
+        {/* Admin Panel Content */}
+        <main class="relative z-10 container mx-auto px-6 py-12">
+
+            {/* Statistics Dashboard Section */}
+            <section id="statisticsDashboard" class="mb-12">
+                <h2 class="text-3xl font-bold font-heading text-white mb-6 border-b border-white/10 pb-2">Admin & NGO Dashboard 📊</h2>
+                <div id="statsContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                    <div class="glassmorphic p-6 rounded-xl border border-primary/20">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="material-symbols-outlined text-3xl text-primary">park</span>
+                            <span class="text-2xl font-bold text-primary" id="totalTreesStat">...</span>
+                        </div>
+                        <p class="text-sm text-white/70">Total Trees Registered</p>
+                    </div>
+                    <div class="glassmorphic p-6 rounded-xl border border-primary/20">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="material-symbols-outlined text-3xl text-primary">check_circle</span>
+                            <span class="text-2xl font-bold text-primary" id="approvedTreesStat">...</span>
+                        </div>
+                        <p class="text-sm text-white/70">Approved Trees</p>
+                    </div>
+                    <div class="glassmorphic p-6 rounded-xl border border-primary/20">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="material-symbols-outlined text-3xl text-primary">people</span>
+                            <span class="text-2xl font-bold text-primary" id="totalUsersStat">...</span>
+                        </div>
+                        <p class="text-sm text-white/70">Active Members</p>
+                    </div>
+                    <div class="glassmorphic p-6 rounded-xl border border-primary/20">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="material-symbols-outlined text-3xl text-primary">water_drop</span>
+                            <span class="text-2xl font-bold text-primary" id="totalWateringLogsStat">...</span>
+                        </div>
+                        <p class="text-sm text-white/70">Total Care Logs</p>
+                    </div>
+                </div>
+                
+                {/* Impact Calculations */}
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                    <div class="glassmorphic p-6 rounded-xl border border-primary/20">
+                        <div class="flex items-center gap-3 mb-3">
+                            <span class="material-symbols-outlined text-3xl text-primary">eco</span>
+                            <h3 class="text-lg font-bold text-white">CO₂ Absorbed</h3>
+                        </div>
+                        <p class="text-3xl font-bold text-primary mb-1" id="co2AbsorbedStat">...</p>
+                        <p class="text-xs text-white/60">kg CO₂/year (estimated)</p>
+                        <p class="text-xs text-white/50 mt-2">Based on: 22.7 kg/tree/year*</p>
+                    </div>
+                    <div class="glassmorphic p-6 rounded-xl border border-primary/20">
+                        <div class="flex items-center gap-3 mb-3">
+                            <span class="material-symbols-outlined text-3xl text-primary">air</span>
+                            <h3 class="text-lg font-bold text-white">Oxygen Generated</h3>
+                        </div>
+                        <p class="text-3xl font-bold text-primary mb-1" id="oxygenGeneratedStat">...</p>
+                        <p class="text-xs text-white/60">kg O₂/year (estimated)</p>
+                        <p class="text-xs text-white/50 mt-2">Based on: 118 kg/tree/year*</p>
+                    </div>
+                    <div class="glassmorphic p-6 rounded-xl border border-primary/20">
+                        <div class="flex items-center gap-3 mb-3">
+                            <span class="material-symbols-outlined text-3xl text-primary">trending_up</span>
+                            <h3 class="text-lg font-bold text-white">Survival Rate</h3>
+                        </div>
+                        <p class="text-3xl font-bold text-primary mb-1" id="survivalRateStat">...</p>
+                        <p class="text-xs text-white/60">% of trees with recent care</p>
+                        <p class="text-xs text-white/50 mt-2">Trees watered in last 30 days</p>
+                    </div>
+                </div>
+
+                {/* Additional Metrics */}
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="glassmorphic p-6 rounded-xl border border-primary/20">
+                        <h3 class="text-lg font-bold text-white mb-4">Top Communities</h3>
+                        <div id="topCommunitiesList" class="space-y-2">
+                            <p class="text-white/60 text-sm">Loading...</p>
+                        </div>
+                    </div>
+                    <div class="glassmorphic p-6 rounded-xl border border-primary/20">
+                        <h3 class="text-lg font-bold text-white mb-4">Care Frequency</h3>
+                        <div id="careFrequencyStats" class="space-y-2">
+                            <p class="text-white/60 text-sm">Loading...</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* Pending Trees Section */}
+            <section id="pendingTreesSection" class="mb-12">
+                <h2 class="text-3xl font-bold font-heading text-white mb-6 border-b border-white/10 pb-2">Pending Tree Approvals</h2>
+                <div id="pendingTreesList" class="space-y-4">
+                    <div id="loadingSpinnerPending" class="text-center p-8 glassmorphic">
+                        <span class="material-symbols-outlined text-4xl text-primary animate-spin">progress_activity</span>
+                        <p class="text-white/70 mt-2">Loading pending trees...</p>
+                    </div>
+                </div>
+            </section>
+
+            {/* --- NEW: Pending Watering Logs Section --- */}
+            <section id="pendingWateringLogsSection" class="mb-12">
+                <h2 class="text-3xl font-bold font-heading text-white mb-6 border-b border-white/10 pb-2">Pending Watering Verifications</h2>
+                <div id="pendingWateringLogsList" class="space-y-4">
+                    <div id="loadingSpinnerWatering" class="text-center p-8 glassmorphic">
+                        <span class="material-symbols-outlined text-4xl text-primary animate-spin">progress_activity</span>
+                        <p class="text-white/70 mt-2">Loading pending watering logs...</p>
+                    </div>
+                    {/* Pending watering logs will be loaded here */}
+                </div>
+            </section>
+
+
+            {/* Approved Trees Section */}
+            <section id="approvedTreesSection" class="mb-12">
+                <h2 class="text-3xl font-bold font-heading text-white mb-6 border-b border-white/10 pb-2">Manage Approved Trees</h2>
+                <div id="approvedTreesList" class="space-y-4">
+                     <div id="loadingSpinnerApproved" class="text-center p-8 glassmorphic">
+                        <span class="material-symbols-outlined text-4xl text-primary animate-spin">progress_activity</span>
+                        <p class="text-white/70 mt-2">Loading approved trees...</p>
+                    </div>
+                    {/* Approved trees list goes here */}
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    {/* Load JS files */}
+    <script type="module" src="firebase-init.js"></script>
+    <script type="module" src="admin.js"></script>
+</body>
+</html>

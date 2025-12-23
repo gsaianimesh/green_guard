@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Partners & Green Rewards - GreenGuard</title>
+    <link href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🌱%3C/text%3E%3C/svg%3E" rel="icon" type="image/svg+xml" />
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=Poppins:wght@700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#06f967",
+                        "gg-green-bright": "#4CAF50",
+                        "gg-green-dark": "#0B1C11",
+                        "gg-green-mid": "#102918",
+                        "gg-green-light": "#133A21",
+                        "gg-green-cta": "#1A4B2B",
+                        "gg-dark-neutral": "#0E1F14",
+                        "background-dark": "#0B0E0C",
+                    },
+                    fontFamily: {
+                        display: ["Inter", "sans-serif"],
+                        heading: ["Poppins", "sans-serif"],
+                    },
+                    borderRadius: { DEFAULT: "0.5rem", lg: "1rem", xl: "1.5rem", full: "9999px" },
+                    boxShadow: { 'glow-primary': '0 0 15px 5px rgba(6, 249, 103, 0.4), 0 0 5px 2px rgba(6, 249, 103, 0.6)', 'glow-green': '0 0 15px 5px rgba(76, 175, 80, 0.4), 0 0 5px 2px rgba(76, 175, 80, 0.6)', }
+                },
+            },
+        };
+    </script>
+    <style type="text/tailwindcss">
+        @layer components {
+            .glassmorphic { @apply bg-white/5 border border-white/10 shadow-lg rounded-xl; -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
+        }
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .animate-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #06f967 0%, #4CAF50 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+    </style>
+</head>
+
+<body class="bg-background-dark text-white font-display antialiased">
+    <div class="relative min-h-screen w-full flex flex-col overflow-x-hidden">
+        
+        <div class="absolute inset-0 z-0">
+            <img alt="Lush forest background" class="object-cover w-full h-full opacity-30" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYSTih5Kfltb8DoSzjqRVXy3xwkyn6sDpIQZqTCWpuntjDlq_Cq_13KnLkDKm_tdYXGm2R_JNPMbnvI1k3dA4xsoFik4Dz6apadnq790M9UdGO-6nLKtgJjVYRn_24FGVQ3-AvOhG3QCXTYKti0VV_ewEyjIvz5xgq8_ilm4D8J8E28sEE1NF4WweW_ejQjOeKve5wuJPxBe_4ewplD8CcwGtZ0bxCjYmQwvoGhUKhWOgRu0JnWd_my_AokNOYiWa4BmsPDpdU6_M" />
+            <div class="absolute inset-0 bg-gradient-to-t from-background-dark via-background-dark/80 to-transparent"></div>
+        </div>
+        
+        <div class="relative z-10 flex flex-col h-full grow">
+            <header class="fixed top-0 left-0 right-0 z-50 glassmorphic rounded-b-xl">
+                 <nav class="container mx-auto px-6 py-4 flex items-center justify-between">
+                     <a href="index.html" class="flex items-center gap-2"> 
+                         <span class="text-2xl text-primary drop-shadow-glow-primary">🌱</span> 
+                         <h2 class="text-xl font-bold tracking-tight text-white font-heading">GreenGuard</h2> 
+                     </a>
+                     <div class="hidden md:flex items-center gap-6"> 
+                         <a class="text-sm font-medium text-white/80 hover:text-white transition-colors" href="about.html">About</a> 
+                         <a class="text-sm font-medium text-white/80 hover:text-white transition-colors" href="view-tree.html">Explore Map</a> 
+                         <a class="text-sm font-medium text-white/80 hover:text-white transition-colors" href="partners.html">Partners</a> 
+                         <a class="text-sm font-medium text-white/80 hover:text-white transition-colors" href="faq.html">FAQ</a> 
+                         <a class="text-sm font-medium text-white/80 hover:text-white transition-colors" href="index.html">Home</a> 
+                     </div>
+                     <div class="flex items-center gap-3"> 
+                         <a id="loginBtn" href="auth.html" class="bg-white/10 hover:bg-white/20 text-white text-sm font-bold uppercase py-2 px-5 rounded-full transition-all duration-300">Login</a> 
+                         <a id="dashboardBtn" href="dashboard.html" class="text-primary hover:text-white text-sm font-medium hidden" title="My Dashboard"> <span class="material-symbols-outlined">dashboard</span> </a> 
+                         <a id="adminBtn" href="admin.html" class="bg-red-600 hover:bg-red-500 text-white text-sm font-bold uppercase py-2 px-4 rounded-full transition-all duration-300 hidden" title="Admin Panel"> <span class="material-symbols-outlined text-base leading-none">admin_panel_settings</span> </a> 
+                         <a id="waterTreeBtn" href="water-tree.html" class="bg-blue-600 hover:bg-blue-500 text-white text-sm font-bold uppercase py-2 px-4 rounded-full transition-all duration-300 hidden" title="Water Trees"> <span class="material-symbols-outlined text-base leading-none">water_drop</span> </a> 
+                         <a id="registerTreeBtn" href="register-tree.html" class="bg-primary hover:shadow-glow-primary text-background-dark text-sm font-bold uppercase py-2 px-4 rounded-full transition-all duration-300 hidden" title="Register New Tree"> <span class="material-symbols-outlined text-base leading-none">add_circle</span> </a> 
+                         <button id="signOutBtn" class="text-white/60 hover:text-white text-sm font-medium hidden" title="Sign Out"> <span class="material-symbols-outlined">logout</span> </button> 
+                     </div>
+                 </nav>
+            </header>
+
+            <main class="container mx-auto px-6 mt-24">
+                
+                <section class="text-center pt-20 pb-16 animate-on-scroll">
+                    <div class="inline-block mb-6">
+                        <span class="text-6xl">🤝</span>
+                    </div>
+                    <h1 class="text-5xl md:text-7xl font-black tracking-tighter text-white leading-tight mb-6 font-heading">
+                        Partners & <span class="gradient-text">Green Rewards</span>
+                    </h1>
+                    <p class="text-xl md:text-2xl font-medium text-white/70 max-w-3xl mx-auto leading-relaxed">
+                        Building impact through partnerships with corporates, NGOs, schools, and sustainability-focused brands
+                    </p>
+                </section>
+
+                <section class="py-16 animate-on-scroll">
+                    <div class="glassmorphic rounded-2xl p-8 md:p-12 border border-primary/20">
+                        <div class="flex items-center gap-4 mb-6">
+                            <div class="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center">
+                                <span class="material-symbols-outlined text-3xl text-primary">handshake</span>
+                            </div>
+                            <h2 class="text-4xl font-bold font-heading text-white">🌱 Building Impact Through Partnerships</h2>
+                        </div>
+                        <div class="space-y-4 text-lg text-white/80 leading-relaxed">
+                            <p>
+                                Our platform is designed to work with <strong class="text-primary">corporates, NGOs, schools, and sustainability-focused brands</strong> to create a transparent and community-driven tree care ecosystem.
+                            </p>
+                            <p>
+                                Instead of one-time donations or symbolic actions, partnerships on our platform focus on <strong class="text-primary">verified environmental impact and long-term engagement</strong>.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="py-16 animate-on-scroll">
+                    <div class="text-center mb-12">
+                        <h2 class="text-4xl md:text-5xl font-bold font-heading text-white mb-4">🪙 Green Coins & Rewards Program</h2>
+                        <p class="text-xl text-white/70 max-w-3xl mx-auto">A reward system that incentivizes genuine environmental actions through verified, rule-based validation</p>
+                    </div>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div class="glassmorphic p-8 rounded-xl border border-primary/20 hover:border-primary/40 transition-all">
+                            <div class="flex items-center gap-4 mb-6">
+                                <div class="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center">
+                                    <span class="material-symbols-outlined text-3xl text-primary">monetization_on</span>
+                                </div>
+                                <h3 class="text-2xl font-bold text-white">Earning Green Coins</h3>
+                            </div>
+                            <p class="text-white/80 mb-6 leading-relaxed">
+                                Users earn Green Coins for verified environmental actions such as:
+                            </p>
+                            <ul class="space-y-3">
+                                <li class="flex items-start gap-3">
+                                    <span class="material-symbols-outlined text-primary mt-1">check_circle</span>
+                                    <span class="text-white/80">Planting trees</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <span class="material-symbols-outlined text-primary mt-1">check_circle</span>
+                                    <span class="text-white/80">Watering and maintaining trees</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <span class="material-symbols-outlined text-primary mt-1">check_circle</span>
+                                    <span class="text-white/80">Adopting and consistently caring for trees</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <span class="material-symbols-outlined text-primary mt-1">check_circle</span>
+                                    <span class="text-white/80">Participating in community-led green initiatives</span>
+                                </li>
+                            </ul>
+                            <div class="mt-6 p-4 bg-primary/10 border border-primary/30 rounded-lg">
+                                <p class="text-sm text-white/80">
+                                    <strong class="text-primary">Verified Actions:</strong> Each action is validated using rule-based logic (GPS proximity, timestamps, and activity limits), ensuring that rewards are earned only for genuine efforts.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="glassmorphic p-8 rounded-xl border border-primary/20 hover:border-primary/40 transition-all">
+                            <div class="flex items-center gap-4 mb-6">
+                                <div class="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center">
+                                    <span class="material-symbols-outlined text-3xl text-primary">redeem</span>
+                                </div>
+                                <h3 class="text-2xl font-bold text-white">🎁 Redeeming Green Coins</h3>
+                            </div>
+                            <p class="text-white/80 mb-6 leading-relaxed">
+                                Green Coins can be redeemed for:
+                            </p>
+                            <ul class="space-y-3">
+                                <li class="flex items-start gap-3">
+                                    <span class="material-symbols-outlined text-primary mt-1">local_offer</span>
+                                    <span class="text-white/80">Discount coupons from partner brands</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <span class="material-symbols-outlined text-primary mt-1">eco</span>
+                                    <span class="text-white/80">Eco-friendly products or services</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <span class="material-symbols-outlined text-primary mt-1">card_giftcard</span>
+                                    <span class="text-white/80">Digital vouchers</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <span class="material-symbols-outlined text-primary mt-1">workspace_premium</span>
+                                    <span class="text-white/80">Sustainability-focused rewards</span>
+                                </li>
+                            </ul>
+                            <div class="mt-6 p-4 bg-primary/10 border border-primary/30 rounded-lg">
+                                <p class="text-sm text-white/80">
+                                    This encourages continued participation while promoting <strong class="text-primary">environmentally responsible consumption</strong>.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="py-16 animate-on-scroll">
+                    <div class="glassmorphic rounded-2xl p-8 md:p-12 border border-primary/30 bg-gradient-to-br from-primary/5 to-transparent">
+                        <div class="flex items-center gap-4 mb-8">
+                            <div class="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center">
+                                <span class="material-symbols-outlined text-3xl text-primary">business</span>
+                            </div>
+                            <h2 class="text-4xl font-bold font-heading text-white">🏢 Corporate & CSR Partnerships</h2>
+                        </div>
+
+                        <div class="mb-12">
+                            <h3 class="text-2xl font-bold text-white mb-6">Why Corporates Partner With Us</h3>
+                            <p class="text-lg text-white/80 mb-6 leading-relaxed">
+                                Many organizations are required to allocate annual budgets toward Corporate Social Responsibility (CSR), environmental sustainability initiatives, and philanthropy. By partnering with our platform, corporates can:
+                            </p>
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div class="p-6 bg-white/5 rounded-xl border border-primary/20">
+                                    <span class="material-symbols-outlined text-3xl text-primary mb-3 block">verified</span>
+                                    <h4 class="text-xl font-bold text-white mb-2">Support Verified Impact</h4>
+                                    <p class="text-white/80 text-sm">Support verified tree care and survival efforts with transparent, trackable outcomes.</p>
+                                </div>
+                                <div class="p-6 bg-white/5 rounded-xl border border-primary/20">
+                                    <span class="material-symbols-outlined text-3xl text-primary mb-3 block">trending_up</span>
+                                    <h4 class="text-xl font-bold text-white mb-2">Incentivize Behavior</h4>
+                                    <p class="text-white/80 text-sm">Encourage eco-friendly behavior among citizens through meaningful rewards.</p>
+                                </div>
+                                <div class="p-6 bg-white/5 rounded-xl border border-primary/20">
+                                    <span class="material-symbols-outlined text-3xl text-primary mb-3 block">analytics</span>
+                                    <h4 class="text-xl font-bold text-white mb-2">Demonstrate Impact</h4>
+                                    <p class="text-white/80 text-sm">Show measurable social and environmental impact with rule-based calculations.</p>
+                                </div>
+                                <div class="p-6 bg-white/5 rounded-xl border border-primary/20">
+                                    <span class="material-symbols-outlined text-3xl text-primary mb-3 block">groups</span>
+                                    <h4 class="text-xl font-bold text-white mb-2">Engage Communities</h4>
+                                    <p class="text-white/80 text-sm">Foster meaningful sustainability actions at the community level.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="border-t border-white/10 pt-8">
+                            <h3 class="text-2xl font-bold text-white mb-6">How Corporate Partnerships Work</h3>
+                            <div class="space-y-6">
+                                <div class="flex items-start gap-4">
+                                    <div class="flex-shrink-0 w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center text-xl font-bold text-primary">
+                                        1
+                                    </div>
+                                    <div class="flex-1">
+                                        <h4 class="text-lg font-bold text-white mb-2">Join as Green Rewards Partner</h4>
+                                        <p class="text-white/80">A corporate joins our platform as a Green Rewards Partner and allocates a CSR or sustainability budget.</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-4">
+                                    <div class="flex-shrink-0 w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center text-xl font-bold text-primary">
+                                        2
+                                    </div>
+                                    <div class="flex-1">
+                                        <h4 class="text-lg font-bold text-white mb-2">Users Earn Green Coins</h4>
+                                        <p class="text-white/80">Users earn Green Coins through verified tree care actions validated by our rule-based system.</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-4">
+                                    <div class="flex-shrink-0 w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center text-xl font-bold text-primary">
+                                        3
+                                    </div>
+                                    <div class="flex-1">
+                                        <h4 class="text-lg font-bold text-white mb-2">Coins Redeemed for Rewards</h4>
+                                        <p class="text-white/80">Coins are redeemed for partner-provided coupons or rewards, creating a sustainable engagement loop.</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-4">
+                                    <div class="flex-shrink-0 w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center text-xl font-bold text-primary">
+                                        4
+                                    </div>
+                                    <div class="flex-1">
+                                        <h4 class="text-lg font-bold text-white mb-2">Transparent Impact Reports</h4>
+                                        <p class="text-white/80">The corporate receives transparent impact reports and dashboards showing real environmental outcomes.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-8 p-6 bg-primary/10 border border-primary/30 rounded-xl">
+                                <p class="text-white/90 font-semibold">
+                                    This model converts CSR spending into <strong class="text-primary">real, trackable environmental outcomes</strong>, not just symbolic gestures.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="py-16 animate-on-scroll">
+                    <div class="text-center mb-12">
+                        <h2 class="text-4xl md:text-5xl font-bold font-heading text-white mb-4">🌍 Social Impact & Brand Visibility</h2>
+                        <p class="text-xl text-white/70 max-w-3xl mx-auto">Partner organizations can showcase their genuine contribution to environmental sustainability</p>
+                    </div>
+                    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <div class="glassmorphic p-6 rounded-xl border border-primary/20 text-center hover:border-primary/40 transition-all hover:-translate-y-2">
+                            <span class="material-symbols-outlined text-4xl text-primary mb-4 block">park</span>
+                            <h3 class="text-lg font-bold text-white mb-2">Trees Supported</h3>
+                            <p class="text-white/70 text-sm">Number of trees actively supported through your partnership</p>
+                        </div>
+                        <div class="glassmorphic p-6 rounded-xl border border-primary/20 text-center hover:border-primary/40 transition-all hover:-translate-y-2">
+                            <span class="material-symbols-outlined text-4xl text-primary mb-4 block">trending_up</span>
+                            <h3 class="text-lg font-bold text-white mb-2">Survival Rates</h3>
+                            <p class="text-white/70 text-sm">Tree survival rates showing long-term impact of care efforts</p>
+                        </div>
+                        <div class="glassmorphic p-6 rounded-xl border border-primary/20 text-center hover:border-primary/40 transition-all hover:-translate-y-2">
+                            <span class="material-symbols-outlined text-4xl text-primary mb-4 block">groups</span>
+                            <h3 class="text-lg font-bold text-white mb-2">Community Participation</h3>
+                            <p class="text-white/70 text-sm">Levels of community engagement and active participation</p>
+                        </div>
+                        <div class="glassmorphic p-6 rounded-xl border border-primary/20 text-center hover:border-primary/40 transition-all hover:-translate-y-2">
+                            <span class="material-symbols-outlined text-4xl text-primary mb-4 block">eco</span>
+                            <h3 class="text-lg font-bold text-white mb-2">Environmental Impact</h3>
+                            <p class="text-white/70 text-sm">Estimated CO₂ absorption and oxygen generation (rule-based)</p>
+                        </div>
+                    </div>
+                    <div class="mt-8 glassmorphic p-6 rounded-xl border border-primary/20">
+                        <p class="text-white/80 text-center leading-relaxed">
+                            This enables partners to communicate their contribution as a <strong class="text-primary">genuine social cause, not just a promotional activity</strong>. All metrics are transparent, verifiable, and based on actual community actions.
+                        </p>
+                    </div>
+                </section>
+
+                <section class="py-16 animate-on-scroll">
+                    <div class="glassmorphic rounded-2xl p-8 md:p-12 border border-primary/20">
+                        <div class="flex items-center gap-4 mb-6">
+                            <div class="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center">
+                                <span class="material-symbols-outlined text-3xl text-primary">school</span>
+                            </div>
+                            <h2 class="text-4xl font-bold font-heading text-white">🏫 NGOs, Schools & Institutions</h2>
+                        </div>
+                        <p class="text-lg text-white/80 mb-8 leading-relaxed">
+                            Environmental NGOs, schools, and colleges can partner with our platform to:
+                        </p>
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div class="p-6 bg-white/5 rounded-xl border border-primary/20">
+                                <span class="material-symbols-outlined text-3xl text-primary mb-3 block">monitoring</span>
+                                <h3 class="text-xl font-bold text-white mb-2">Monitor Plantation Drives</h3>
+                                <p class="text-white/80 text-sm">Track the progress and survival of trees planted through your initiatives with real-time dashboards.</p>
+                            </div>
+                            <div class="p-6 bg-white/5 rounded-xl border border-primary/20">
+                                <span class="material-symbols-outlined text-3xl text-primary mb-3 block">group</span>
+                                <h3 class="text-xl font-bold text-white mb-2">Track Participation</h3>
+                                <p class="text-white/80 text-sm">Monitor student or volunteer participation in tree care activities with verified action logs.</p>
+                            </div>
+                            <div class="p-6 bg-white/5 rounded-xl border border-primary/20">
+                                <span class="material-symbols-outlined text-3xl text-primary mb-3 block">favorite</span>
+                                <h3 class="text-xl font-bold text-white mb-2">Encourage Responsibility</h3>
+                                <p class="text-white/80 text-sm">Foster long-term responsibility toward planted trees through adoption and care programs.</p>
+                            </div>
+                            <div class="p-6 bg-white/5 rounded-xl border border-primary/20">
+                                <span class="material-symbols-outlined text-3xl text-primary mb-3 block">dashboard</span>
+                                <h3 class="text-xl font-bold text-white mb-2">Access Dashboards</h3>
+                                <p class="text-white/80 text-sm">Get comprehensive dashboards for progress tracking and impact reporting for stakeholders.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="py-16 animate-on-scroll">
+                    <div class="glassmorphic rounded-2xl p-8 md:p-12 border border-primary/30 bg-gradient-to-br from-primary/5 to-transparent">
+                        <div class="flex items-center gap-4 mb-8">
+                            <div class="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center">
+                                <span class="material-symbols-outlined text-3xl text-primary">verified</span>
+                            </div>
+                            <h2 class="text-4xl font-bold font-heading text-white">🔒 Transparency & Ethics</h2>
+                        </div>
+                        <div class="grid md:grid-cols-2 gap-8">
+                            <div class="space-y-4">
+                                <h3 class="text-2xl font-bold text-primary mb-4">Our Commitment</h3>
+                                <ul class="space-y-3">
+                                    <li class="flex items-start gap-3">
+                                        <span class="material-symbols-outlined text-primary mt-1">check_circle</span>
+                                        <span class="text-white/80">All rewards are tied to verified user actions</span>
+                                    </li>
+                                    <li class="flex items-start gap-3">
+                                        <span class="material-symbols-outlined text-primary mt-1">check_circle</span>
+                                        <span class="text-white/80">No artificial inflation of impact metrics</span>
+                                    </li>
+                                    <li class="flex items-start gap-3">
+                                        <span class="material-symbols-outlined text-primary mt-1">check_circle</span>
+                                        <span class="text-white/80">No AI or automated claims</span>
+                                    </li>
+                                    <li class="flex items-start gap-3">
+                                        <span class="material-symbols-outlined text-primary mt-1">check_circle</span>
+                                        <span class="text-white/80">Fully rule-based and auditable system</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="p-6 bg-primary/10 border border-primary/30 rounded-xl">
+                                <h3 class="text-xl font-bold text-white mb-3">Our Priority</h3>
+                                <p class="text-white/90 text-lg leading-relaxed">
+                                    We prioritize <strong class="text-primary">authentic impact over marketing claims</strong>. Every metric, every reward, and every partnership outcome is based on real, verifiable community actions.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="py-16 animate-on-scroll">
+                    <div class="glassmorphic rounded-2xl p-8 md:p-12 border border-primary/20">
+                        <div class="text-center mb-8">
+                            <div class="inline-block mb-4">
+                                <span class="text-5xl">🚀</span>
+                            </div>
+                            <h2 class="text-4xl font-bold font-heading text-white mb-4">Current Status</h2>
+                            <p class="text-lg text-white/80 max-w-2xl mx-auto leading-relaxed">
+                                The Partners & Green Rewards program is currently in the <strong class="text-primary">pilot and onboarding phase</strong>.
+                            </p>
+                        </div>
+                        <div class="max-w-3xl mx-auto space-y-4 text-white/80">
+                            <p class="text-center">
+                                We are actively exploring collaborations with organizations that share our vision of sustainable, community-led environmental care.
+                            </p>
+                            <p class="text-center">
+                                Official partners and rewards will be displayed as collaborations are finalized.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="py-20 my-16 bg-gradient-to-r from-gg-green-light to-gg-green-cta rounded-2xl glassmorphic animate-on-scroll">
+                    <div class="text-center max-w-4xl mx-auto">
+                        <div class="inline-block mb-6">
+                            <span class="text-6xl">📩</span>
+                        </div>
+                        <h2 class="text-4xl md:text-5xl font-bold font-heading text-white mb-6">Partner With Us</h2>
+                        <p class="text-xl text-white/80 leading-relaxed mb-8 max-w-2xl mx-auto">
+                            If your organization is interested in supporting verified environmental actions and community engagement, we welcome you to explore partnership opportunities with us.
+                        </p>
+                        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                            <a href="mailto:partners@greenguard.in" class="bg-primary hover:shadow-glow-primary text-background-dark text-lg font-bold uppercase py-4 px-8 rounded-full transition-all duration-300">
+                                Contact Partnership Team
+                            </a>
+                            <a href="about.html" class="bg-white/10 hover:bg-white/20 text-white text-lg font-bold uppercase py-4 px-8 rounded-full transition-all duration-300">
+                                Learn More About Us
+                            </a>
+                        </div>
+                        <div class="mt-8 p-6 bg-white/5 rounded-xl border border-white/10 max-w-2xl mx-auto">
+                            <p class="text-white/80 text-sm">
+                                <strong class="text-primary">Partnership Benefits Include:</strong> Transparent impact reporting, brand visibility, community engagement metrics, and the opportunity to make a real difference in environmental sustainability.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+            </main>
+
+            <footer class="bg-gradient-to-t from-[#1b1f1c] to-background-dark/0 mt-20">
+                <div class="container mx-auto px-6 py-12 text-center">
+                    <div class="flex items-center justify-center gap-6 mb-8"> 
+                        <a class="text-sm font-medium text-white/80 hover:text-white transition-colors" href="about.html">About</a> 
+                        <a class="text-sm font-medium text-white/80 hover:text-white transition-colors" href="auth.html">Join</a> 
+                        <a class="text-sm font-medium text-white/80 hover:text-white transition-colors" href="partners.html">Partners</a> 
+                        <a class="text-sm font-medium text-white/80 hover:text-white transition-colors" href="faq.html">FAQ</a> 
+                        <a class="text-sm font-medium text-white/80 hover:text-white transition-colors" href="index.html">Home</a> 
+                    </div>
+                    <p class="text-sm text-white/50">© 2025 GreenGuard. All rights reserved.</p>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <script type="module" src="firebase-init.js"></script>
+    <script type="module">
+        import { auth } from './firebase-init.js';
+        import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+        const ADMIN_UID = "PASTE_YOUR_OWN_USER_UID_HERE";
+
+        function setupAuthListeners() {
+            const loginBtn = document.getElementById('loginBtn');
+            const signOutBtn = document.getElementById('signOutBtn');
+            const dashboardBtn = document.getElementById('dashboardBtn');
+            const adminBtn = document.getElementById('adminBtn');
+            const waterTreeBtn = document.getElementById('waterTreeBtn');
+            const registerTreeBtn = document.getElementById('registerTreeBtn');
+
+            onAuthStateChanged(auth, (user) => {
+                if (user) {
+                    if(loginBtn) loginBtn.style.display = 'none';
+                    if(signOutBtn) signOutBtn.style.display = 'block';
+                    if(dashboardBtn) dashboardBtn.style.display = 'block';
+                    if(waterTreeBtn) waterTreeBtn.style.display = 'block';
+                    if(registerTreeBtn) registerTreeBtn.style.display = 'block';
+                    if (user.uid === ADMIN_UID && adminBtn) { adminBtn.style.display = 'block'; }
+                    else if (adminBtn) { adminBtn.style.display = 'none'; }
+                } else {
+                    if(loginBtn) loginBtn.style.display = 'block';
+                    if(signOutBtn) signOutBtn.style.display = 'none';
+                    if(dashboardBtn) dashboardBtn.style.display = 'none';
+                    if(adminBtn) adminBtn.style.display = 'none';
+                    if(waterTreeBtn) waterTreeBtn.style.display = 'none';
+                    if(registerTreeBtn) registerTreeBtn.style.display = 'none';
+                }
+            });
+
+            if (signOutBtn) {
+                signOutBtn.addEventListener('click', () => {
+                    signOut(auth).then(() => {
+                        alert('You have been signed out.');
+                        window.location.reload();
+                    }).catch((error) => {
+                        console.error('Sign out error:', error);
+                        alert(`Sign out failed: ${error.message}`);
+                    });
+                });
+            }
+        }
+
+        function setupScrollAnimations() {
+            const elements = document.querySelectorAll('.animate-on-scroll');
+            if (!elements.length) return;
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { 
+                threshold: 0.1
+            });
+
+            elements.forEach(el => observer.observe(el));
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            setupAuthListeners();
+            setupScrollAnimations();
+        });
+    </script>
+
+</body>
+</html>
+

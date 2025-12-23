@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>GreenGuard - Grow a Greener India</title>
+    <link href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🌱%3C/text%3E%3C/svg%3E" rel="icon" type="image/svg+xml" />
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=Poppins:wght@700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#06f967",
+                        "gg-green-bright": "#4CAF50",
+                        "gg-green-dark": "#0B1C11",
+                        "gg-green-mid": "#102918",
+                        "gg-green-light": "#133A21",
+                        "gg-green-cta": "#1A4B2B",
+                        "gg-dark-neutral": "#0E1F14",
+                        "background-dark": "#0B0E0C",
+                    },
+                    fontFamily: {
+                        display: ["Inter", "sans-serif"],
+                        heading: ["Poppins", "sans-serif"],
+                    },
+                    borderRadius: { DEFAULT: "0.5rem", lg: "1rem", xl: "1.5rem", full: "9999px" },
+                    boxShadow: { 'glow-primary': '0 0 15px 5px rgba(6, 249, 103, 0.4), 0 0 5px 2px rgba(6, 249, 103, 0.6)', 'glow-green': '0 0 15px 5px rgba(76, 175, 80, 0.4), 0 0 5px 2px rgba(76, 175, 80, 0.6)', }
+                },
+            },
+        };
+    </script>
+    <style type="text/tailwindcss">
+        @layer components {
+            .glassmorphic { @apply bg-white/5 border border-white/10 shadow-lg rounded-xl; -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
+            .gallery-img { @apply rounded-xl aspect-square object-cover transition-transform duration-300 hover:scale-105 bg-white/5; }
+            .leaderboard-img { @apply w-16 h-16 rounded-full object-cover border-2; }
+            .member-img { @apply w-full h-48 object-cover rounded-lg mb-4 bg-white/10; }
+        }
+        .leaflet-popup-content-wrapper, .leaflet-popup-tip { background: #0E1F14; color: #fff; border: 1px solid rgba(255, 255, 255, 0.1); }
+        .leaflet-container { @apply rounded-lg; background: #0E1F14; }
+        .title-pulse { animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .8; } }
+
+        /* Custom Leaflet Cluster Icon */
+        .cluster-icon {
+            background-color: rgba(6, 249, 103, 0.2);
+            border: 2px solid #06f967;
+            color: #fff;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 14px;
+            box-shadow: 0 0 10px rgba(6, 249, 103, 0.5);
+            transform: translate(-20px, -20px);
+        }
+        .leaflet-marker-cluster { background: transparent; }
+
+        /* Scroll Animation Classes */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .animate-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+    </style>
+</head>
+
+<body class="bg-background-dark text-white font-display antialiased">
+    <div class="relative min-h-screen w-full flex flex-col overflow-x-hidden">
+        
+        <div class="absolute inset-0 z-0">
+            <img alt="Lush forest background" class="object-cover w-full h-full opacity-30" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYSTih5Kfltb8DoSzjqRVXy3xwkyn6sDpIQZqTCWpuntjDlq_Cq_13KnLkDKm_tdYXGm2R_JNPMbnvI1k3dA4xsoFik4Dz6apadnq790M9UdGO-6nLKtgJjVYRn_24FGVQ3-AvOhG3QCXTYKti0VV_ewEyjIvz5xgq8_ilm4D8J8E28sEE1NF4WweW_ejQjOeKve5wuJPxBe_4ewplD8CcwGtZ0bxCjYmQwvoGhUKhWOgRu0JnWd_my_AokNOYiWa4BmsPDpdU6_M" />
+            <div class="absolute inset-0 bg-gradient-to-t from-background-dark via-background-dark/80 to-transparent"></div>
+        </div>
+        
+        <div class="relative z-10 flex flex-col h-full grow">
+            <header class="fixed top-0 left-0 right-0 z-50 glassmorphic rounded-b-xl">
+                 <nav class="container mx-auto px-6 py-4 flex items-center justify-between"><a href="index.html" class="flex items-center gap-2"> <span class="text-2xl text-primary drop-shadow-glow-primary">🌱</span> <h2 class="text-xl font-bold tracking-tight text-white font-heading">GreenGuard</h2> </a><div class="hidden md:flex items-center gap-6"> <a class="text-sm font-medium text-white/80 hover:text-white transition-colors" href="about.html">About</a> <a class="text-sm font-medium text-white/80 hover:text-white transition-colors" href="view-tree.html">Explore Map</a> <a class="text-sm font-medium text-white/80 hover:text-white transition-colors" href="partners.html">Partners</a> <a class="text-sm font-medium text-white/80 hover:text-white transition-colors" href="faq.html">FAQ</a> </div><div class="flex items-center gap-3"> <a id="loginBtn" href="auth.html" class="bg-white/10 hover:bg-white/20 text-white text-sm font-bold uppercase py-2 px-5 rounded-full transition-all duration-300">Login</a> <a id="dashboardBtn" href="dashboard.html" class="text-primary hover:text-white text-sm font-medium hidden" title="My Dashboard"> <span class="material-symbols-outlined">dashboard</span> </a> <a id="adminBtn" href="admin.html" class="bg-red-600 hover:bg-red-500 text-white text-sm font-bold uppercase py-2 px-4 rounded-full transition-all duration-300 hidden" title="Admin Panel"> <span class="material-symbols-outlined text-base leading-none">admin_panel_settings</span> </a> <a id="waterTreeBtn" href="water-tree.html" class="bg-blue-600 hover:bg-blue-500 text-white text-sm font-bold uppercase py-2 px-4 rounded-full transition-all duration-300 hidden" title="Water Trees"> <span class="material-symbols-outlined text-base leading-none">water_drop</span> </a> <a id="registerTreeBtn" href="register-tree.html" class="bg-primary hover:shadow-glow-primary text-background-dark text-sm font-bold uppercase py-2 px-4 rounded-full transition-all duration-300 hidden" title="Register New Tree"> <span class="material-symbols-outlined text-base leading-none">add_circle</span> </a> <button id="signOutBtn" class="text-white/60 hover:text-white text-sm font-medium hidden" title="Sign Out"> <span class="material-symbols-outlined">logout</span> </button> </div></nav>
+            </header>
+
+            <main class="container mx-auto px-6 mt-24">
+                <section class="text-center pt-16 pb-16">
+                    <h1 class="text-5xl md:text-7xl font-black tracking-tighter text-white leading-tight mb-4 font-heading title-pulse"> Together, We Grow a Greener India 🌍 </h1>
+                    <h2 class="text-lg md:text-xl font-medium text-white/70 max-w-2xl mx-auto mb-8"> Join your local community to nurture government-planted trees and watch our collective impact flourish. </h2>
+                    <div class="flex flex-col sm:flex-row items-center justify-center gap-4"> <a href="auth.html" id="joinMovementLink" class="w-full sm:w-auto bg-primary hover:shadow-glow-primary text-background-dark text-base font-bold uppercase py-4 px-8 rounded-full transition-all duration-300"> Join the Movement </a> </div>
+                </section>
+
+                <section class="py-16 animate-on-scroll">
+                    <div class="text-center mb-12">
+                        <h2 class="text-4xl md:text-5xl font-bold font-heading text-white mb-4">📊 How Much is Involved</h2>
+                        <p class="text-xl text-white/70 max-w-3xl mx-auto">Real-time metrics showing our collective impact and community participation</p>
+                    </div>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-8">
+                        <div class="glassmorphic rounded-xl p-6 text-center border border-primary/20 hover:border-primary/40 transition-all hover:-translate-y-1 hover:shadow-glow-primary">
+                            <span class="material-symbols-outlined text-4xl text-primary mb-2 block">park</span>
+                            <p class="text-3xl md:text-4xl font-bold text-primary mb-1" id="treeCountDisplay">...</p>
+                            <p class="text-sm text-white/70">Trees Registered</p>
+                        </div>
+                        <div class="glassmorphic rounded-xl p-6 text-center border border-primary/20 hover:border-primary/40 transition-all hover:-translate-y-1 hover:shadow-glow-primary">
+                            <span class="material-symbols-outlined text-4xl text-primary mb-2 block">groups</span>
+                            <p class="text-3xl md:text-4xl font-bold text-primary mb-1" id="memberCountDisplay">...</p>
+                            <p class="text-sm text-white/70">Active Members</p>
+                        </div>
+                        <div class="glassmorphic rounded-xl p-6 text-center border border-primary/20 hover:border-primary/40 transition-all hover:-translate-y-1 hover:shadow-glow-primary">
+                            <span class="material-symbols-outlined text-4xl text-primary mb-2 block">location_city</span>
+                            <p class="text-3xl md:text-4xl font-bold text-primary mb-1" id="communityCountDisplay">...</p>
+                            <p class="text-sm text-white/70">Communities</p>
+                        </div>
+                        <div class="glassmorphic rounded-xl p-6 text-center border border-primary/20 hover:border-primary/40 transition-all hover:-translate-y-1 hover:shadow-glow-primary">
+                            <span class="material-symbols-outlined text-4xl text-primary mb-2 block">water_drop</span>
+                            <p class="text-3xl md:text-4xl font-bold text-primary mb-1" id="careLogsDisplay">...</p>
+                            <p class="text-sm text-white/70">Care Logs</p>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="glassmorphic rounded-xl p-8 text-center border border-primary/30 bg-gradient-to-br from-primary/10 to-transparent hover:border-primary/50 transition-all">
+                            <span class="material-symbols-outlined text-5xl text-primary mb-3 block">co2</span>
+                            <p class="text-4xl font-bold text-primary mb-2" id="co2AbsorbedDisplay">...</p>
+                            <p class="text-base font-medium text-white/80">CO₂ Absorbed (kg/year)</p>
+                        </div>
+                        <div class="glassmorphic rounded-xl p-8 text-center border border-primary/30 bg-gradient-to-br from-primary/10 to-transparent hover:border-primary/50 transition-all">
+                            <span class="material-symbols-outlined text-5xl text-primary mb-3 block">air</span>
+                            <p class="text-4xl font-bold text-primary mb-2" id="oxygenGeneratedDisplay">...</p>
+                            <p class="text-base font-medium text-white/80">Oxygen Generated (kg/year)</p>
+                        </div>
+                        <div class="glassmorphic rounded-xl p-8 text-center border border-primary/30 bg-gradient-to-br from-primary/10 to-transparent hover:border-primary/50 transition-all">
+                            <span class="material-symbols-outlined text-5xl text-primary mb-3 block">trending_up</span>
+                            <p class="text-4xl font-bold text-primary mb-2" id="survivalRateDisplay">...</p>
+                            <p class="text-base font-medium text-white/80">Survival Rate</p>
+                        </div>
+                    </div>
+                </section>
+                
+                <section class="py-16 animate-on-scroll">
+                    <div class="text-center mb-12">
+                        <h2 class="text-4xl font-bold tracking-tight text-white font-heading">Top Communities 🌍</h2>
+                        <p class="text-lg text-white/70 mt-2">Cities and regions leading the green movement</p>
+                    </div>
+                    <div class="max-w-2xl mx-auto">
+                        <div id="topCommunitiesList" class="glassmorphic rounded-xl p-6">
+                            <div class="flex justify-between items-center text-sm py-2 border-b border-white/10 animate-pulse">
+                                <div class="h-4 w-32 bg-white/10 rounded"></div>
+                                <div class="h-4 w-20 bg-white/10 rounded"></div>
+                            </div>
+                            <div class="flex justify-between items-center text-sm py-2 border-b border-white/10 animate-pulse">
+                                <div class="h-4 w-32 bg-white/10 rounded"></div>
+                                <div class="h-4 w-20 bg-white/10 rounded"></div>
+                            </div>
+                            <div class="flex justify-between items-center text-sm py-2 animate-pulse">
+                                <div class="h-4 w-32 bg-white/10 rounded"></div>
+                                <div class="h-4 w-20 bg-white/10 rounded"></div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="py-24 my-16 bg-gradient-to-b from-gg-green-dark to-gg-green-mid relative glassmorphic animate-on-scroll">
+                    <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/fog.png')] opacity-5"></div>
+                    <div class="relative z-10 p-6 md:p-8">
+                        <div class="text-center mb-12"><h2 class="text-5xl font-bold font-heading text-white">Explore Registered Trees</h2><p class="text-lg text-white/70 mt-2">See where the GreenGuard community is active.</p></div>
+                        <div class="p-4 bg-black/20 rounded-xl max-w-5xl mx-auto">
+                             <div id="map" class="w-full h-[500px] rounded-lg border border-white/10">
+                                 <div id="mapLoading" class="h-full flex items-center justify-center text-white/50 animate-pulse">Loading map...</div>
+                             </div>
+                        </div>
+                        <div class="text-center mt-12"> <a href="view-tree.html" class="inline-block bg-gradient-to-r from-gg-green-bright to-primary text-white font-bold py-4 px-8 rounded-full transition-shadow hover:shadow-glow-green"> → View Nearby List & Endorse </a> </div>
+                    </div>
+                </section>
+                
+                <section class="py-16 animate-on-scroll">
+                     <div class="text-center mb-12"> <h2 class="text-4xl font-bold tracking-tight text-white font-heading">Power in Your Hands</h2> <p class="text-lg text-white/70 mt-2 max-w-3xl mx-auto">Core features that make GreenGuard a vibrant platform.</p> </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8"> <div class="glassmorphic p-8 rounded-xl border border-primary/20 hover:border-primary/50 transition-all duration-300 transform hover:-translate-y-2"><span class="material-symbols-outlined text-4xl text-primary mb-4">park</span><h3 class="text-xl font-bold text-white mb-2">Track Trees</h3><p class="text-sm text-white/70">Monitor the health and growth of trees in your community.</p></div> <div class="glassmorphic p-8 rounded-xl border border-primary/20 hover:border-primary/50 transition-all duration-300 transform hover:-translate-y-2"><span class="material-symbols-outlined text-4xl text-primary mb-4">military_tech</span><h3 class="text-xl font-bold text-white mb-2">Earn Rewards</h3><p class="text-sm text-white/70">Gain Eco Points for your contributions.</p></div> <div class="glassmorphic p-8 rounded-xl border border-primary/20 hover:border-primary/50 transition-all duration-300 transform hover:-translate-y-2"><span class="material-symbols-outlined text-4xl text-primary mb-4">groups</span><h3 class="text-xl font-bold text-white mb-2">Build Communities</h3><p class="text-sm text-white/70">Connect, share, and collaborate on local green initiatives.</p></div> </div>
+                </section>
+
+                <section class="py-16 animate-on-scroll">
+                     <div class="text-center mb-12"> <h2 class="text-4xl font-bold tracking-tight text-white font-heading">Our Most Dedicated Members</h2> <p class="text-lg text-white/70 mt-2">Celebrating the heroes who lead our green revolution.</p> </div>
+                     <div id="dedicatedMembersList" class="flex overflow-x-auto space-x-6 pb-4 [-ms-scrollbar-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+                         </div>
+                </section>
+                
+                <section class="py-16 bg-gg-dark-neutral/50 glassmorphic animate-on-scroll">
+                    <div class="p-6 md:p-8">
+                        <div class="flex justify-between items-center mb-10"> <h2 class="text-4xl font-bold font-heading">This Week’s Top Guardians 🏆</h2> <button class="text-gg-green-bright font-semibold hover:text-white transition-colors opacity-50 cursor-not-allowed">View Full Leaderboard (TBD)</button> </div>
+                        <div id="leaderboardList" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                             </div>
+                    </div>
+                </section>
+
+                 <section class="py-16 animate-on-scroll">
+                     <div class="text-center mb-12"> <h2 class="text-4xl font-bold tracking-tight text-white font-heading">Community Gallery</h2> <p class="text-lg text-white/70 mt-2">A snapshot of recently added trees.</p> </div>
+                     <div id="galleryGrid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                         </div>
+                </section>
+                
+                <section class="py-24 animate-on-scroll"><div class="grid md:grid-cols-2 gap-12 items-center"><div class="text-center md:text-left"><h2 class="text-4xl lg:text-5xl font-heading font-bold text-white leading-tight mb-4">Smart Rule-Based Monitoring 📊</h2><p class="text-lg text-white/80">Our system tracks watering logs and automatically alerts you when trees need attention. Get instant notifications based on time-based rules and community care patterns!</p><a href="about.html" class="inline-block mt-8 bg-white/10 hover:bg-white/20 text-white font-bold py-3 px-6 rounded-full transition-colors"> See How It Works </a></div><div>
+                    <img src="plant.jpg" alt="Tree monitoring concept illustration" class="w-full max-w-md mx-auto opacity-80 rounded-lg aspect-square object-cover">
+                </div></div></section>
+
+                <section class="py-24 bg-gradient-to-b from-gg-green-dark to-gg-green-mid glassmorphic animate-on-scroll">
+                    <div class="container mx-auto px-6">
+                        <div class="text-center mb-12">
+                            <h2 class="text-4xl lg:text-5xl font-heading font-bold text-white mb-4">Rule-Based Monitoring & Validation Engine ⚙️</h2>
+                            <p class="text-lg text-white/70 max-w-3xl mx-auto">Transparent, deterministic, and compliant with non-AI constraints</p>
+                        </div>
+                        <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                            <div class="glassmorphic p-6 rounded-xl border border-primary/20">
+                                <div class="flex items-center gap-3 mb-4">
+                                    <span class="material-symbols-outlined text-3xl text-primary">verified</span>
+                                    <h3 class="text-xl font-bold text-white">No AI / ML Used</h3>
+                                </div>
+                                <p class="text-white/80 text-sm leading-relaxed">The platform uses a rule-based engine to track tree care and engagement. All decisions are deterministic and based on predefined logical formulas, ensuring complete transparency and compliance.</p>
+                            </div>
+                            <div class="glassmorphic p-6 rounded-xl border border-primary/20">
+                                <div class="flex items-center gap-3 mb-4">
+                                    <span class="material-symbols-outlined text-3xl text-primary">rule</span>
+                                    <h3 class="text-xl font-bold text-white">Deterministic Logic</h3>
+                                </div>
+                                <p class="text-white/80 text-sm leading-relaxed">Actions such as watering, health updates, and adoption are validated using GPS proximity, timestamps, frequency limits, and predefined checklists. Tree health scores are calculated using logical formulas based on community inputs.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="py-24 animate-on-scroll">
+                    <div class="container mx-auto px-6">
+                        <div class="text-center mb-12">
+                            <h2 class="text-4xl font-heading font-bold text-white mb-4">Smart Verification Features 🛡️</h2>
+                            <p class="text-lg text-white/70 max-w-3xl mx-auto">Built-in safeguards ensure your care activities are authentic and help maintain trust in our community</p>
+                        </div>
+                        <div class="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+                            <div class="glassmorphic p-6 rounded-xl border border-primary/20 hover:border-primary/40 transition-all">
+                                <div class="flex items-center gap-3 mb-4">
+                                    <div class="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center">
+                                        <span class="material-symbols-outlined text-primary text-2xl">gps_fixed</span>
+                                    </div>
+                                    <h4 class="font-bold text-white text-lg">Location Verification</h4>
+                                </div>
+                                <p class="text-white/80 text-sm leading-relaxed mb-3">When you log tree care, we verify that you're actually at the tree location. Your photo's GPS coordinates must be within 50 meters of the registered tree location.</p>
+                                <div class="flex items-center gap-2 text-xs text-primary/80">
+                                    <span class="material-symbols-outlined text-sm">check_circle</span>
+                                    <span>Automatically verified from your photo</span>
+                                </div>
+                            </div>
+
+                            <div class="glassmorphic p-6 rounded-xl border border-primary/20 hover:border-primary/40 transition-all">
+                                <div class="flex items-center gap-3 mb-4">
+                                    <div class="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center">
+                                        <span class="material-symbols-outlined text-primary text-2xl">schedule</span>
+                                    </div>
+                                    <h4 class="font-bold text-white text-lg">Fair Care Distribution</h4>
+                                </div>
+                                <p class="text-white/80 text-sm leading-relaxed mb-3">To ensure everyone gets a chance to care for trees, you can only log care for the same tree once every 24 hours. This prevents duplicate entries and encourages community participation.</p>
+                                <div class="flex items-center gap-2 text-xs text-primary/80">
+                                    <span class="material-symbols-outlined text-sm">check_circle</span>
+                                    <span>One care log per tree per day</span>
+                                </div>
+                            </div>
+
+                            <div class="glassmorphic p-6 rounded-xl border border-primary/20 hover:border-primary/40 transition-all">
+                                <div class="flex items-center gap-3 mb-4">
+                                    <div class="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center">
+                                        <span class="material-symbols-outlined text-primary text-2xl">photo_camera</span>
+                                    </div>
+                                    <h4 class="font-bold text-white text-lg">Photo Proof Required</h4>
+                                </div>
+                                <p class="text-white/80 text-sm leading-relaxed mb-3">Every care activity requires a photo taken at the time of care. The photo must be taken within 15 minutes of logging the activity, and must include location data to verify authenticity.</p>
+                                <div class="flex items-center gap-2 text-xs text-primary/80">
+                                    <span class="material-symbols-outlined text-sm">check_circle</span>
+                                    <span>Real-time verification from your camera</span>
+                                </div>
+                            </div>
+
+                            <div class="glassmorphic p-6 rounded-xl border border-primary/20 hover:border-primary/40 transition-all">
+                                <div class="flex items-center gap-3 mb-4">
+                                    <div class="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center">
+                                        <span class="material-symbols-outlined text-primary text-2xl">security</span>
+                                    </div>
+                                    <h4 class="font-bold text-white text-lg">Quality Protection</h4>
+                                </div>
+                                <p class="text-white/80 text-sm leading-relaxed mb-3">Our system automatically detects unusual patterns like rapid multiple logs or location mismatches. These activities are flagged for review by our admin team to ensure data quality and prevent misuse.</p>
+                                <div class="flex items-center gap-2 text-xs text-primary/80">
+                                    <span class="material-symbols-outlined text-sm">check_circle</span>
+                                    <span>Admin-reviewed for accuracy</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <section class="py-16 animate-on-scroll">
+                    <div class="text-center mb-12">
+                        <h2 class="text-4xl font-bold font-heading">Stories from Our Guardians 🌿</h2>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <div class="glassmorphic rounded-xl p-6 text-center relative transition-all duration-300 transform hover:-translate-y-2 hover:shadow-lg">
+                            <div class="w-20 h-20 rounded-full mx-auto bg-white/10 border-2 border-primary/50 mb-4 flex items-center justify-center">
+                                <img src="https://ui-avatars.com/api/?name=Sameer+Khan&background=06f967&color=0B0E0C&size=80&bold=true" alt="Sameer Khan" class="w-full h-full rounded-full object-cover">
+                            </div>
+                            <p class="italic text-white/90 text-base leading-relaxed mb-4">"Seeing the sapling I registered grow taller each month is amazing! The watering reminders help me stay consistent, and earning points makes it fun."</p>
+                            <div class="mt-4">
+                                <h4 class="font-bold text-white">Sameer Khan</h4>
+                                <p class="text-sm text-white/60 mt-1">Hyderabad Green Heroes</p>
+                                <p class="text-sm text-primary font-semibold mt-1">8,500 XP</p>
+                            </div>
+                        </div>
+                        <div class="glassmorphic rounded-xl p-6 text-center relative transition-all duration-300 transform hover:-translate-y-2 hover:shadow-lg">
+                            <div class="w-20 h-20 rounded-full mx-auto bg-white/10 border-2 border-primary/50 mb-4 flex items-center justify-center">
+                                <img src="https://ui-avatars.com/api/?name=Anjali+Rao&background=06f967&color=0B0E0C&size=80&bold=true" alt="Anjali Rao" class="w-full h-full rounded-full object-cover">
+                            </div>
+                            <p class="italic text-white/90 text-base leading-relaxed mb-4">"The verification photo for watering seemed like extra work at first, but knowing it ensures accountability makes me trust the platform more. Plus, admin approval got me points!"</p>
+                            <div class="mt-4">
+                                <h4 class="font-bold text-white">Anjali Rao</h4>
+                                <p class="text-sm text-white/60 mt-1">Bangalore Bloomers</p>
+                                <p class="text-sm text-primary font-semibold mt-1">11,200 XP</p>
+                            </div>
+                        </div>
+                        <div class="glassmorphic rounded-xl p-6 text-center relative transition-all duration-300 transform hover:-translate-y-2 hover:shadow-lg">
+                            <div class="w-20 h-20 rounded-full mx-auto bg-white/10 border-2 border-primary/50 mb-4 flex items-center justify-center">
+                                <img src="https://ui-avatars.com/api/?name=Vikram+Desai&background=06f967&color=0B0E0C&size=80&bold=true" alt="Vikram Desai" class="w-full h-full rounded-full object-cover">
+                            </div>
+                            <p class="italic text-white/90 text-base leading-relaxed mb-4">"Using the 'Nearby Trees' map helped me find a few saplings near my office that needed endorsement. It's great to contribute even when I'm not near home."</p>
+                            <div class="mt-4">
+                                <h4 class="font-bold text-white">Vikram Desai</h4>
+                                <p class="text-sm text-white/60 mt-1">Mumbai Trekkers</p>
+                                <p class="text-sm text-primary font-semibold mt-1">9,800 XP</p>
+                            </div>
+                        </div>
+                        <div class="glassmorphic rounded-xl p-6 text-center relative transition-all duration-300 transform hover:-translate-y-2 hover:shadow-lg">
+                            <div class="w-20 h-20 rounded-full mx-auto bg-white/10 border-2 border-primary/50 mb-4 flex items-center justify-center">
+                                <img src="https://ui-avatars.com/api/?name=Lakshmi+Iyer&background=06f967&color=0B0E0C&size=80&bold=true" alt="Lakshmi Iyer" class="w-full h-full rounded-full object-cover">
+                            </div>
+                            <p class="italic text-white/90 text-base leading-relaxed mb-4">"The care suggestions for my registered Mango tree gave me a good starting point for its watering needs. Very helpful feature!"</p>
+                            <div class="mt-4">
+                                <h4 class="font-bold text-white">Lakshmi Iyer</h4>
+                                <p class="text-sm text-white/60 mt-1">Chennai Roots</p>
+                                <p class="text-sm text-primary font-semibold mt-1">7,100 XP</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="py-20 my-16 bg-gradient-to-r from-gg-green-light to-gg-green-cta rounded-xl glassmorphic animate-on-scroll"> <div class="grid md:grid-cols-2 gap-8 items-center p-6 md:p-8"> <div class="text-center">
+                    <img src="depositphotos_2043806-Plant-in-hands.jpg" alt="A sapling in a hand" class="max-w-xs mx-auto rounded-lg shadow-lg">
+                </div><div class="text-center md:text-left"><h2 class="font-heading font-bold text-4xl text-white mb-2">Adopt a Tree Today 🌱</h2><p class="text-lg text-white/80 mb-6">Thousands of saplings need your care. Become a guardian and nurture your tree to life.</p><p class="text-3xl font-bold text-primary mb-6"><span id="adoptableTreeCount">2,348</span> trees waiting for care</p><button class="bg-primary text-background-dark font-bold py-4 px-10 rounded-full text-lg hover:shadow-glow-primary transition-shadow opacity-70 cursor-not-allowed" disabled title="Adoption Feature Coming Soon"> Adopt Now </button></div></div></section>
+
+            </main>
+
+            <footer class="bg-gradient-to-t from-[#1b1f1c] to-background-dark/0 mt-20">
+                <div class="container mx-auto px-6 py-12 text-center">
+                    <div class="flex items-center justify-center gap-6 mb-8"> 
+                        <a class="text-sm font-medium text-white/80 hover:text-white transition-colors" href="about.html">About</a> 
+                        <a class="text-sm font-medium text-white/80 hover:text-white transition-colors" href="auth.html">Join</a> 
+                        <a class="text-sm font-medium text-white/80 hover:text-white transition-colors" href="partners.html">Partners</a> 
+                        <a class="text-sm font-medium text-white/80 hover:text-white transition-colors" href="faq.html">FAQ</a> 
+                        <a class="text-sm font-medium text-white/80 hover:text-white transition-colors" href="index.html">Home</a> 
+                    </div>
+                    <p class="text-sm text-white/50">© 2025 GreenGuard. All rights reserved.</p>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+
+    <script type="module" src="firebase-init.js"></script>
+    <script type="module" src="home.js"></script>
+
+</body>
+</html>

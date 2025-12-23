@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Water Trees | GreenGuard</title>
+
+    <link href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🌱%3C/text%3E%3C/svg%3E" rel="icon" type="image/svg+xml" />
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=Poppins:wght@700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                 extend: {
+                    colors: {
+                        primary: "#06f967",
+                        "gg-green-bright": "#4CAF50",
+                        "gg-green-dark": "#0B1C11",
+                        "gg-green-mid": "#102918",
+                        "gg-green-light": "#133A21",
+                        "gg-green-cta": "#1A4B2B",
+                        "gg-dark-neutral": "#0E1410",
+                        "background-dark": "#0B0E0C",
+                    },
+                    fontFamily: {
+                        display: ["Inter", "sans-serif"],
+                        heading: ["Poppins", "sans-serif"],
+                    },
+                     borderRadius: { DEFAULT: "0.5rem", lg: "1rem", xl: "1.5rem", full: "9999px" },
+                    boxShadow: { /* ... */ }
+                },
+            },
+        };
+    </script>
+
+    <style type="text/tailwindcss">
+        @layer components {
+            .glassmorphic {
+                @apply bg-white/5 border border-white/10 shadow-lg rounded-xl;
+                -webkit-backdrop-filter: blur(10px);
+                backdrop-filter: blur(10px);
+            }
+             /* Style for the 'Water Me!' button */
+            .water-btn {
+                 @apply bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded-full text-sm transition-colors flex items-center gap-1 justify-center;
+            }
+             /* Style for button after watering, pending verification */
+            .water-btn.pending {
+                 @apply bg-yellow-600 hover:bg-yellow-600 cursor-not-allowed opacity-80;
+            }
+             /* Style for button if watered today and approved (optional) */
+             .water-btn.watered {
+                 @apply bg-green-600 hover:bg-green-600 cursor-not-allowed opacity-70;
+             }
+        }
+    </style>
+</head>
+
+<body class="bg-background-dark text-white font-display antialiased flex flex-col min-h-screen">
+
+    <div class="absolute inset-0 z-0">
+        <div class="absolute inset-0 bg-gradient-to-t from-background-dark to-gg-green-dark"></div>
+    </div>
+
+    <header class="relative z-20 glassmorphic sticky top-0">
+        <nav class="container mx-auto px-6 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <span class="text-2xl text-primary drop-shadow-glow-primary">💧</span>
+                <h2 class="text-xl font-bold tracking-tight text-white font-heading">Water Nearby Trees</h2>
+            </div>
+            <a href="index.html" class="text-sm font-medium text-white/80 hover:text-white transition-colors">← Back to Homepage</a>
+        </nav>
+    </header>
+
+    <main class="relative z-10 container mx-auto px-6 py-12 grow">
+
+        <div id="loadingOverlay" class="glassmorphic text-center p-8">
+            <span class="material-symbols-outlined text-4xl text-primary animate-spin">progress_activity</span>
+            <p class="text-white/70 mt-4">Getting your location and finding thirsty trees...</p>
+        </div>
+
+        <div id="contentContainer" class="hidden">
+            <div class="glassmorphic p-6 md:p-8">
+                <h2 class="text-3xl font-bold font-heading text-white mb-6">Trees Needing Water Nearby</h2>
+                 <p class="text-white/70 mb-6 text-sm">Based on registered watering schedules. Click 'Water Me!' and upload a photo after watering.</p>
+
+                <div id="treeList" class="space-y-4">
+                    </div>
+            </div>
+        </div>
+    </main>
+
+    {/* --- Hidden input for verification photo --- */}
+    <input type="file" id="verifyPhotoInput" class="hidden" accept="image/*" capture="environment">
+
+    {/* --- Load JS files --- */}
+    {/* *** Exif-js library is required BEFORE water-tree.js *** */}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/exif-js/2.3.0/exif.min.js"></script>
+    <script type="module" src="firebase-init.js"></script>
+    <script type="module" src="water-tree.js"></script>
+</body>
+</html>

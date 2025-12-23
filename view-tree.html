@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Nearby Trees | GreenGuard</title>
+    
+    <link href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🌱%3C/text%3E%3C/svg%3E" rel="icon" type="image/svg+xml" />
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=Poppins:wght@700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script> 
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#06f967",
+                        "gg-green-bright": "#4CAF50",
+                        "gg-green-dark": "#0B1C11",
+                        "gg-green-mid": "#102918",
+                        "gg-green-light": "#133A21",
+                        "gg-green-cta": "#1A4B2B",
+                        "gg-dark-neutral": "#0E1410", 
+                        "background-dark": "#0B0E0C",
+                    },
+                    fontFamily: {
+                        display: ["Inter", "sans-serif"],
+                        heading: ["Poppins", "sans-serif"],
+                    },
+                },
+            },
+        };
+    </script>
+    
+    <style type="text/tailwindcss">
+        @layer components {
+            .glassmorphic {
+                @apply bg-white/5 border border-white/10 shadow-lg;
+                -webkit-backdrop-filter: blur(10px);
+                backdrop-filter: blur(10px);
+            }
+        }
+        /* Make map popups match the dark theme */
+        .leaflet-popup-content-wrapper, .leaflet-popup-tip {
+            background: #0E1410;
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .leaflet-container {
+            @apply rounded-lg;
+            background: #0E1410; /* Dark background for map */
+        }
+    </style>
+</head>
+
+<body class="bg-background-dark text-white font-display antialiased flex flex-col min-h-screen">
+    
+    <div class="absolute inset-0 z-0">
+        <div class="absolute inset-0 bg-gradient-to-t from-background-dark to-gg-green-dark"></div>
+    </div>
+
+    <header class="relative z-20 glassmorphic rounded-b-xl sticky top-0">
+        <nav class="container mx-auto px-6 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <span class="text-2xl text-primary drop-shadow-glow-primary">🌱</span>
+                <h2 class="text-xl font-bold tracking-tight text-white font-heading">Nearby Trees</h2>
+            </div>
+            <a href="index.html" class="text-sm font-medium text-white/80 hover:text-white transition-colors">← Back to Homepage</a>
+        </nav>
+    </header>
+
+    <main class="relative z-10 container mx-auto px-6 py-12 grow">
+        
+        <div id="loadingOverlay" class="glassmorphic rounded-xl text-center p-8">
+            <span class="material-symbols-outlined text-4xl text-primary animate-spin">progress_activity</span>
+            <p class="text-white/70 mt-4">Getting your location and finding nearby trees...</p>
+        </div>
+        
+        <div id="contentContainer" class="hidden">
+            <div class="glassmorphic rounded-xl p-6 md:p-8 mb-12">
+                <h2 class="text-3xl font-bold font-heading text-white mb-4">Nearby Pending Trees</h2>
+                <p class="text-white/70 mb-6">These trees are nearby and need your endorsement to be verified.</p>
+                
+                <div id="treeList" class="space-y-4">
+                    </div>
+            </div>
+
+            <div class="glassmorphic rounded-xl p-6 md:p-8">
+                <h2 class="text-3xl font-bold font-heading text-white mb-6">Live Tree Map</h2>
+                <p class="text-white/70 mb-6">Explore all registered trees. 🟡 = Pending, 🌲 = Approved.</p>
+
+                <div id="map" class="w-full h-[500px] rounded-lg border border-white/10"></div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    
+    <script type="module" src="firebase-init.js"></script>
+    <script type="module" src="view-tree.js"></script>
+</body>
+</html>
