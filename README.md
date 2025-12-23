@@ -201,6 +201,21 @@ Before you begin, ensure you have:
 
 ## 🚀 Getting Started
 
+## 🌐 Use Without Download (Recommended)
+
+GreenGuard is fully web-based and does **not require any installation or download**.
+
+Simply open the live application:
+
+👉 https://green-guard-69.netlify.app/
+
+- Sign in using your **Google account**
+- Start registering and caring for trees instantly
+- Works on desktop and mobile browsers
+
+No setup. No build. No installation.
+
+
 ### Quick Start (3 Steps)
 
 #### 1. Download the Repository
