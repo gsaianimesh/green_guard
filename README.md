@@ -205,8 +205,7 @@ Before you begin, ensure you have:
 
 #### 1. Download the Repository
 ```bash
-git clone https://github.com/yourusername/greenguard_landing_page.git
-cd greenguard_landing_page
+git clone [https://github.com/yourusername/greenguard_landing_page.git](https://github.com/gsaianimesh/green_guard.git)
 ```
 
 Or download as ZIP and extract the files.
